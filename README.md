@@ -232,8 +232,9 @@ $this->get('vm5_entity_translations.translation_loader')->setLocale('bg');
 
 You can change language of single entity:
 ```php
-$this->get('vm5_entity_translations.translation_loader')->initializeTranslation($entity, 'bg');
+$initializedLocale = $this->get('vm5_entity_translations.translation_loader')->initializeTranslation($entity, 'bg');
 ```
+`$initializedLocale` is actual locale initialized in entity - it's not necessary to be `bg`, it could be one of fallback locales. 
 
 You can detach entity from manager
 ```php
