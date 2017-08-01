@@ -1,0 +1,21 @@
+{
+  "name": "vm5/entity-translations-bundle",
+  "description": "This bundle provides Tranlations for entities in your project. It's a bundle, but can be used standalone.",
+  "type": "symfony-bundle",
+  "authors": [
+    {
+      "name": "Bozhidar Hristov",
+      "email": "b.hristov@vm5.eu"
+    }
+  ],
+  "keywords": [
+    "translation"
+  ],
+  "require": {
+    "doctrine/orm": "~2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "VM5\\EntityTranslationsBundle\\": "src/"
+    }
+  }

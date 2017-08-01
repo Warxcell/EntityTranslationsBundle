@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <services>
+        <service id="vm5_entity_translations.translation_loader"
+                 class="VM5\EntityTranslationsBundle\EventSubscriber\CurrentTranslationLoader">
+            <tag name="doctrine.event_subscriber"/>
+        </service>
+
+        <service id="vm5_entity_translations.locale_loader"
+                 class="VM5\EntityTranslationsBundle\EventSubscriber\LocaleListener">
+            <tag name="kernel.event_subscriber"/>
+
+            <argument type="service" id="vm5_entity_translations.translation_loader"/>
+            <argument type="service" id="translator"/>
+        </service>
+    </services>
+</container>
