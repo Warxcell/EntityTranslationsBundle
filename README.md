@@ -220,3 +220,24 @@ class NewsTranslation implements Translation
     }
 }
 ```
+
+
+Internal API:
+
+If you wish to change language of all managed entities:
+
+```php
+$this->get('vm5_entity_translations.translation_loader')->setLocale('bg');
+```
+
+You can change language of single entity:
+```php
+$this->get('vm5_entity_translations.translation_loader')->initializeTranslation($entity, 'bg');
+```
+
+You can detach entity from manager
+```php
+$this->get('vm5_entity_translations.translation_loader')->detach($entity);
+```
+
+So it would be affected by locale changing.
