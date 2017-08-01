@@ -139,7 +139,7 @@ NewsTranslations.php
 ```php
 <?php
 
-namespace OnePay\SharedBundle\Entity\Card;
+namespace Example;
 
 use Doctrine\ORM\Mapping as ORM;
 use VM5\EntityTranslationsBundle\Model\Translation;
