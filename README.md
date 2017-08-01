@@ -135,6 +135,7 @@ class News implements Translatable
 }
 ```
 
+NewsTranslations.php
 ```php
 <?php
 
@@ -151,7 +152,7 @@ class NewsTranslation implements Translation
 {
 
     /**
-     * @var CardType
+     * @var News
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="News", inversedBy="translations")
      */
