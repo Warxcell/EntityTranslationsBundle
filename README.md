@@ -241,4 +241,4 @@ You can detach entity from manager
 $this->get('vm5_entity_translations.translation_loader')->detach($entity);
 ```
 
-So it would be affected by locale changing.
+So it won't be affected by locale changing.
