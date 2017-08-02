@@ -79,8 +79,8 @@ class CurrentTranslationLoader implements EventSubscriber
     public function getTranslation(Translatable $entity, $languageOrLocale)
     {
         $translations = $entity->getTranslations();
-        $translationsFiltered = array_filter(
-            $translations,
+
+        $translation = $translations->filter(
             function (Translation $item) use ($languageOrLocale) {
                 $translationLanguage = $item->getLanguage();
                 if ($languageOrLocale instanceof Language) {
@@ -89,12 +89,13 @@ class CurrentTranslationLoader implements EventSubscriber
                     return $translationLanguage->getLocale() === $languageOrLocale;
                 }
             }
-        );
-        if (count($translationsFiltered) > 0) {
-            return reset($translationsFiltered);
+        )->first();
+        if ($translation === false) {
+            return null;
+
         }
 
-        return null;
+        return $translation;
     }
 
     public function initializeCurrentTranslation(Translatable $entity)
