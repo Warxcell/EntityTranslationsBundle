@@ -32,39 +32,17 @@ class CurrentTranslationLoader implements EventSubscriber
         $this->fallbackLocales = $fallbackLocales;
     }
 
-    public function initializeTranslation(Translatable $entity, $languageOrLocale)
-    {
-        $this->managed[$this->getId($entity)] = $entity;
-
-        $translations = $entity->getTranslations();
-        if (count($translations) == 0) {
-            return false;
-        }
-
-        $currentTranslation = $translations->filter(
-            function (Translation $item) use ($languageOrLocale) {
-                $translationLanguage = $item->getLanguage();
-                if ($languageOrLocale instanceof Language) {
-                    return $translationLanguage === $languageOrLocale;
-                } else {
-                    return $translationLanguage->getLocale() === $languageOrLocale;
-                }
-            }
-        )->first();
-
-        if (!$currentTranslation) {
-            return false;
-        }
-        $entity->setCurrentTranslation($currentTranslation);
-
-        return true;
-    }
-
+    /**
+     * @return array
+     */
     public function getSubscribedEvents()
     {
         return array('postLoad');
     }
 
+    /**
+     * @param LifecycleEventArgs $Event
+     */
     public function postLoad(LifecycleEventArgs $Event)
     {
         $entity = $Event->getEntity();
@@ -73,6 +51,50 @@ class CurrentTranslationLoader implements EventSubscriber
         }
 
         $this->initializeCurrentTranslation($entity);
+    }
+
+    /**
+     * @param Translatable $entity
+     * @param Language|string $languageOrLocale
+     * @return bool
+     */
+    public function initializeTranslation(Translatable $entity, $languageOrLocale)
+    {
+        $this->managed[$this->getId($entity)] = $entity;
+
+        $translation = $this->getTranslation($entity, $languageOrLocale);
+        if (!$translation) {
+            return false;
+        }
+        $entity->setCurrentTranslation($translation);
+
+        return true;
+    }
+
+    /**
+     * @param Translatable $entity
+     * @param Language|string $languageOrLocale
+     * @return Translation|null
+     */
+    public function getTranslation(Translatable $entity, $languageOrLocale)
+    {
+        $translations = $entity->getTranslations();
+        $translationsFiltered = array_filter(
+            $translations,
+            function (Translation $item) use ($languageOrLocale) {
+                $translationLanguage = $item->getLanguage();
+                if ($languageOrLocale instanceof Language) {
+                    return $translationLanguage === $languageOrLocale;
+                } else {
+                    return $translationLanguage->getLocale() === $languageOrLocale;
+                }
+            }
+        );
+        if (count($translationsFiltered) > 0) {
+            return reset($translationsFiltered);
+        }
+
+        return null;
     }
 
     public function initializeCurrentTranslation(Translatable $entity)
