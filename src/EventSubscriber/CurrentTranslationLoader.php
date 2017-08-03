@@ -26,6 +26,11 @@ class CurrentTranslationLoader implements EventSubscriber
      */
     private $fallbackLocales = [];
 
+    /**
+     * CurrentTranslationLoader constructor.
+     * @param string $locale
+     * @param array $fallbackLocales
+     */
     public function __construct($locale = 'en', array $fallbackLocales = [])
     {
         $this->setLocale($locale);
@@ -117,21 +122,33 @@ class CurrentTranslationLoader implements EventSubscriber
         $this->flush();
     }
 
-    public function setFallbackLocales($fallbackLocales)
+    /**
+     * @param string[] $fallbackLocales
+     */
+    public function setFallbackLocales(array $fallbackLocales)
     {
         $this->fallbackLocales = $fallbackLocales;
     }
 
+    /**
+     * @param Translatable $translatable
+     */
     public function detach(Translatable $translatable)
     {
         unset($this->managed[$this->getId($translatable)]);
     }
 
+    /**
+     * @return string
+     */
     public function getLocale()
     {
         return $this->locale;
     }
 
+    /**
+     * @return string[]
+     */
     public function getFallbackLocales()
     {
         return $this->fallbackLocales;
@@ -144,6 +161,10 @@ class CurrentTranslationLoader implements EventSubscriber
         }
     }
 
+    /**
+     * @param Translatable $entity
+     * @return string
+     */
     private function initializeFallbackTranslation(Translatable $entity)
     {
         $fallbackLocales = $this->getFallbackLocales();
@@ -154,6 +175,10 @@ class CurrentTranslationLoader implements EventSubscriber
         }
     }
 
+    /**
+     * @param Translatable $translatable
+     * @return string
+     */
     private function getId(Translatable $translatable)
     {
         return spl_object_hash($translatable);

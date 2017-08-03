@@ -20,12 +20,20 @@ class LocaleListener implements EventSubscriberInterface
      */
     private $translator;
 
+    /**
+     * LocaleListener constructor.
+     * @param CurrentTranslationLoader $currentTranslationLoader
+     * @param TranslatorInterface $translator
+     */
     public function __construct(CurrentTranslationLoader $currentTranslationLoader, TranslatorInterface $translator)
     {
         $this->currentTranslationLoader = $currentTranslationLoader;
         $this->translator = $translator;
     }
 
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -33,7 +41,9 @@ class LocaleListener implements EventSubscriberInterface
         ];
     }
 
-
+    /**
+     * @param GetResponseEvent $event
+     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         $this->currentTranslationLoader->setLocale($this->translator->getLocale());

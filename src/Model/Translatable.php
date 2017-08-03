@@ -9,5 +9,9 @@ interface Translatable
      */
     public function getTranslations();
 
+    /**
+     * @param Translation $translation
+     * @return mixed
+     */
     public function setCurrentTranslation(Translation $translation);
 }
