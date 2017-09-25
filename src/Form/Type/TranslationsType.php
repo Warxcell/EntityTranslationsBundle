@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use VM5\EntityTranslationsBundle\Model\EditableTranslation;
 use VM5\EntityTranslationsBundle\Model\Language;
 use VM5\EntityTranslationsBundle\Model\Translatable;
 use VM5\EntityTranslationsBundle\Model\Translation;
@@ -66,7 +67,7 @@ class TranslationsType extends FormType
                 foreach ($languages as $language) {
                     $locale = $language->getLocale();
                     if (!isset($newTranslations[$locale])) {
-                        /** @var Translation $translation */
+                        /** @var EditableTranslation $translation */
                         $translation = new $translationClass;
                         $translation->setLanguage($language);
                         $translation->setTranslatable($translatable);
