@@ -1,7 +1,10 @@
 <?php
 
-namespace App\TranslationBundle\Form;
+namespace VM5\EntityTranslationsBundle\Form\Type;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,35 +18,47 @@ use VM5\EntityTranslationsBundle\Model\Translation;
 
 class TranslationsType extends FormType
 {
-    /**
-     * @var Language[]
-     */
-    private $languages = [];
 
     /**
-     * @param Language[] $languages
+     * @var ManagerRegistry
      */
-    public function setLanguages(array $languages)
-    {
-        $this->languages = $languages;
+    private $managerRegistry;
+
+    /**
+     * TranslationsType constructor.
+     * @param PropertyAccessorInterface|null $propertyAccessor
+     * @param ManagerRegistry $managerRegistry
+     */
+    public function __construct(
+        PropertyAccessorInterface $propertyAccessor = null,
+        ManagerRegistry $managerRegistry
+    ) {
+        parent::__construct($propertyAccessor);
+        $this->managerRegistry = $managerRegistry;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $languages = $this->languages;
-
-        if (isset($options['languages'])) {
-            $languages = $options['languages'];
+        if (isset($options['em'])) {
+            $em = $this->managerRegistry->getManager($options['em']);
         } else {
-            if (isset($options['locales'])) {
-                $locales = $options['locales'];
-                $languages = array_filter(
-                    $languages,
-                    function (Language $language) use ($locales) {
-                        return in_array($language->getLocale(), $locales);
-                    }
-                );
-            }
+            $em = $this->managerRegistry->getManager();
+        }
+
+        if ($em === null) {
+            throw new \InvalidArgumentException('Entity manager not found for '.Language::class);
+        }
+        /** @var EntityRepository $repository */
+        $repository = $em->getRepository(Language::class);
+
+        if (isset($options['query_builder'])) {
+            /** @var QueryBuilder $queryBuilder */
+            $queryBuilder = $options['query_builder']($repository);
+            /** @var Language[] $languages */
+            $languages = $queryBuilder->getQuery()->getResult();
+        } else {
+            /** @var Language[] $languages */
+            $languages = $repository->findAll();
         }
 
         $builder->addEventListener(
@@ -110,8 +125,8 @@ class TranslationsType extends FormType
     {
         $resolver->setDefault('delete_empty', true);
         $resolver->setDefault('allow_delete', true);
-        $resolver->setDefined('locales');
-        $resolver->setDefined('languages');
+        $resolver->setDefined('em');
+        $resolver->setDefined('query_builder');
     }
 
     public function getParent()

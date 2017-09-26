@@ -2,7 +2,7 @@
 
 Very simple bundle that allows you to translate your entities.
 
-Installation:
+## Installation:
 - composer require vm5/entity-translations-bundle
 - Register bundle in AppKernel.php: `new VM5\EntityTranslationsBundle\VM5EntityTranslationsBundle()`
 - Translatable must `implements \VM5\EntityTranslationsBundle\Model\Translatable`
@@ -222,7 +222,7 @@ class NewsTranslation implements Translation
 ```
 
 
-Internal API:
+## Internal API:
 
 If you wish to change language of all managed entities:
 
@@ -253,3 +253,36 @@ $translation = $this->get('vm5_entity_translations.translation_loader')->getTran
 ```
 
 Argument #2 can be either string locale or Language entity.
+
+## Using form to easily translate entities.
+
+```yaml
+doctrine:
+   orm:
+        # search for the "ResolveTargetEntityListener" class for an article about this
+        resolve_target_entities: 
+            VM5\EntityTranslationsBundle\Model\Language: Example\Language
+```
+Translation should implements `EditableTranslation` instead of simple `Translation`
+
+```php
+use VM5\EntityTranslationsBundle\Model\EditableTranslation;
+
+class NewsTranslation implements EditableTranslation
+```
+
+And then you can:
+
+```php
+->add(
+    'translations',
+    \VM5\EntityTranslationsBundle\Form\Type\TranslationsType::class,
+    [
+        'entry_type' => NewsTranslationType::class,
+        'em' => 'manager_name',
+        'query_builder' => function(EntityRepository $repo) {
+            return $repo->createQueryBuilder('languages');
+        }
+    ]
+)
+```
