@@ -14,6 +14,17 @@ imports:
     - { resource: "@VM5EntityTranslationsBundle/Resources/config/services.xml" }
 ```
 
+No configuration is needed. Current and fallback locales are taken from Symfony:
+
+[Symfony Translations](http://symfony.com/doc/current/translation.html#configuration)   
+[How to Work with the User's Locale](https://symfony.com/doc/current/translation/locale.html)
+
+```yaml
+framework:
+    translator:      { fallbacks: ["bg", "de"] }
+```
+
+
 
 Example entities:
 
