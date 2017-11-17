@@ -16,14 +16,13 @@ imports:
 
 No configuration is needed. Current and fallback locales are taken from Symfony:
 
-<a href="http://symfony.com/doc/current/translation.html#configuration" target="_blank">Symfony Translations</a>
+<a href="http://symfony.com/doc/current/translation.html#configuration" target="_blank">Symfony Translations</a>    
 <a href="https://symfony.com/doc/current/translation/locale.html" target="_blank">How to Work with the User's Locale</a>
 
 ```yaml
 framework:
     translator:      { fallbacks: ["bg", "de"] }
 ```
-
 
 
 Example entities:
@@ -121,17 +120,22 @@ class News implements Translatable
 
 
     /**
-     * @ORM\OneToMany(targetEntity="NewsTranslations", mappedBy="translatable")
+     * @ORM\OneToMany(targetEntity="NewsTranslation", mappedBy="translatable", cascade={"ALL"}, orphanRemoval=true)
      */
     protected $translations;
 
     /**
-     * @var NewsTranslations
+     * @var NewsTranslation
      */
     private $currentTranslation;
     
     public function getTranslations() {
         return $this->translations;
+    }
+    
+    public function addTranslation(NewsTranslation $translation) {
+        $this->getTranslations()->add($translation);
+        $translation->setTranslatable($this);
     }
 
     public function setCurrentTranslation(Translation $translation) {
@@ -232,6 +236,19 @@ class NewsTranslation implements Translation
 }
 ```
 
+Then you can translate them on yourself
+
+```php
+$news = new News();
+
+$englishTranslation = new NewsTranslation();
+$englishTranslation->setLanguage($englishLanguage);
+$englishTranslation->setTitle('Title on english');
+$news->addTranslation($englishTranslation);
+
+$em->persist($news);
+$em->flush();
+```
 
 ## Internal API:
 
