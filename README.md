@@ -16,8 +16,8 @@ imports:
 
 No configuration is needed. Current and fallback locales are taken from Symfony:
 
-[Symfony Translations](http://symfony.com/doc/current/translation.html#configuration)   
-[How to Work with the User's Locale](https://symfony.com/doc/current/translation/locale.html)
+<a href="http://symfony.com/doc/current/translation.html#configuration" target="_blank">Symfony Translations</a>
+<a href="https://symfony.com/doc/current/translation/locale.html" target="_blank">How to Work with the User's Locale</a>
 
 ```yaml
 framework:
