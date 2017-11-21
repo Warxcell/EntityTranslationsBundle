@@ -282,6 +282,19 @@ $translation = $this->get('vm5_entity_translations.translation_loader')->getTran
 
 Argument #2 can be either string locale or Language entity.
 
+You can also use embedded Twig filters to translate in twig:
+
+```twig
+{{ news|translate('en', 'title')|lower }}
+```
+or get the whole translation:
+```twig
+{% set translation = news|translation('en') %}
+{% if translation %}
+  {{ translation.title }}
+{% endif %}
+```
+
 ## Using form to easily translate entities.
 
 ```yaml

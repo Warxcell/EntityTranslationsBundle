@@ -18,5 +18,10 @@
             <argument type="service" id="vm5_entity_translations.translation_loader"/>
             <argument type="service" id="translator"/>
         </service>
+
+        <service class="VM5\EntityTranslationsBundle\Twig\Extension\TranslationExtension">
+            <argument type="service" id="vm5_entity_translations.translation_loader"/>
+            <argument type="service" id="property_accessor"/>
+        </service>
     </services>
 </container>
