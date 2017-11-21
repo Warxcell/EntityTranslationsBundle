@@ -7,13 +7,14 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;
+use VM5\EntityTranslationsBundle\Translator as EntityTranslator;
 
 class LocaleListener implements EventSubscriberInterface
 {
     /**
-     * @var CurrentTranslationLoader
+     * @var EntityTranslator
      */
-    private $currentTranslationLoader;
+    private $entityTranslator;
 
     /**
      * @var TranslatorInterface
@@ -22,12 +23,12 @@ class LocaleListener implements EventSubscriberInterface
 
     /**
      * LocaleListener constructor.
-     * @param CurrentTranslationLoader $currentTranslationLoader
+     * @param EntityTranslator $currentTranslationLoader
      * @param TranslatorInterface $translator
      */
-    public function __construct(CurrentTranslationLoader $currentTranslationLoader, TranslatorInterface $translator)
+    public function __construct(EntityTranslator $currentTranslationLoader, TranslatorInterface $translator)
     {
-        $this->currentTranslationLoader = $currentTranslationLoader;
+        $this->entityTranslator = $currentTranslationLoader;
         $this->translator = $translator;
     }
 
@@ -46,10 +47,10 @@ class LocaleListener implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $this->currentTranslationLoader->setLocale($this->translator->getLocale());
+        $this->entityTranslator->setLocale($this->translator->getLocale());
 
         if ($this->translator instanceof Translator) {
-            $this->currentTranslationLoader->setFallbackLocales($this->translator->getFallbackLocales());
+            $this->entityTranslator->setFallbackLocales($this->translator->getFallbackLocales());
         }
     }
 }

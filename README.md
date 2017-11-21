@@ -255,19 +255,19 @@ $em->flush();
 If you wish to change language of all managed entities:
 
 ```php
-$this->get('vm5_entity_translations.translation_loader')->setLocale('bg');
+$this->get('vm5_entity_translations.translator')->setLocale('bg');
 ```
 
 You can change language of single entity:
 ```php
-$initializedLocale = $this->get('vm5_entity_translations.translation_loader')->initializeTranslation($entity, 'bg');
+$initializedLocale = $this->get('vm5_entity_translations.translator')->initializeTranslation($entity, 'bg');
 ```
 `$initializedLocale` is actual locale initialized in entity - it's not necessary to be `bg`, it could be one of fallback locales. 
 Argument #2 can be either string locale or Language entity.
 
 You can detach entity from manager
 ```php
-$this->get('vm5_entity_translations.translation_loader')->detach($entity);
+$this->get('vm5_entity_translations.translator')->detach($entity);
 ```
 
 So it won't be affected by locale changing.
@@ -277,7 +277,7 @@ If you wish to get single translation without initialize it, you can use:
 
 ```php
 /** @var $translation \VM5\EntityTranslationBundle\Model\Translation */
-$translation = $this->get('vm5_entity_translations.translation_loader')->getTranslation($entity, 'bg');
+$translation = $this->get('vm5_entity_translations.translator')->getTranslation($entity, 'bg');
 ```
 
 Argument #2 can be either string locale or Language entity.

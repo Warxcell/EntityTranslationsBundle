@@ -3,15 +3,15 @@
 namespace VM5\EntityTranslationsBundle\Twig\Extension;
 
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use VM5\EntityTranslationsBundle\EventSubscriber\CurrentTranslationLoader;
 use VM5\EntityTranslationsBundle\Model\Translatable;
+use VM5\EntityTranslationsBundle\Translator;
 
-class LanguageExtension extends \Twig_Extension
+class TranslationExtension extends \Twig_Extension
 {
     /**
-     * @var CurrentTranslationLoader
+     * @var Translator
      */
-    private $translationService;
+    private $translator;
 
     /**
      * @var PropertyAccessor
@@ -20,14 +20,14 @@ class LanguageExtension extends \Twig_Extension
 
     /**
      * LanguageExtension constructor.
-     * @param CurrentTranslationLoader $translationService
+     * @param Translator $translationService
      * @param PropertyAccessor $propertyAccessor
      */
     public function __construct(
-        CurrentTranslationLoader $translationService,
+        Translator $translationService,
         PropertyAccessor $propertyAccessor
     ) {
-        $this->translationService = $translationService;
+        $this->translator = $translationService;
         $this->propertyAccessor = $propertyAccessor;
     }
 
@@ -42,12 +42,12 @@ class LanguageExtension extends \Twig_Extension
 
     public function getTranslation(Translatable $translatable, $locale)
     {
-        return $this->translationService->getTranslation($translatable, $locale);
+        return $this->translator->getTranslation($translatable, $locale);
     }
 
     public function translate(Translatable $translatable, $locale, $field)
     {
-        $translation = $this->translationService->getTranslation($translatable, $locale);
+        $translation = $this->translator->getTranslation($translatable, $locale);
         if ($translation) {
             return $this->propertyAccessor->getValue($translation, $field);
         }
