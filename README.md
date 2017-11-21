@@ -129,21 +129,27 @@ class News implements Translatable
      */
     private $currentTranslation;
     
-    public function getTranslations() {
+    public function getTranslations() 
+    {
         return $this->translations;
     }
     
-    public function addTranslation(NewsTranslation $translation) {
+    public function addTranslation(NewsTranslation $translation) 
+    {
         $this->getTranslations()->add($translation);
         $translation->setTranslatable($this);
     }
 
-    public function setCurrentTranslation(Translation $translation) {
+    /**
+    * This method is used by bundle to inject current translation.
+    */
+    public function setCurrentTranslation(Translation $translation) 
+    {
         $this->currentTranslation = $translation;
     }
     
     public function getTitle() {
-        if($this->currentTranslation) {
+        if ($this->currentTranslation) {
             return $this->currentTranslation->getTitle();
         }
     }
@@ -231,7 +237,7 @@ class NewsTranslation implements Translation
      */
     public function setTitle($title)
     {
-        $this->name = $title;
+        $this->title = $title;
     }
 }
 ```

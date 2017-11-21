@@ -24,7 +24,7 @@ class Translator
     private $fallbackLocales = [];
 
     /**
-     * CurrentTranslationLoader constructor.
+     * Translator constructor.
      * @param string $locale
      * @param array $fallbackLocales
      */
