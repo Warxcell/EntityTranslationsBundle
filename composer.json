@@ -19,7 +19,8 @@
     "twig/twig": "Needed to use Twig Extension to translate in twig.",
     "symfony/property-access": "Needed for Twig extension to translate",
     "symfony/translation": "Needed if you want to use Symfony Translation's configuration. Otherwise this bundle should be setup separately.",
-    "symfony/form": "Needed if you want to use forms to translate entities."
+    "symfony/form": "Needed if you want to use forms to translate entities.",
+    "doctrine/doctrine-bundle": "Needed if you want to use forms to translate entities."
   },
   "autoload": {
     "psr-4": {
