@@ -13,7 +13,7 @@
         <service id="vm5_entity_translations.translation_loader"
                  alias="vm5_entity_translations.translator"
                  public="true">
-            <deprecated>The "%service_id%" service is deprecated since 1.2 and will be removed in 2.0.</deprecated>
+            <deprecated>The "%service_id%" service is deprecated since 1.2 and will be removed in 2.0. Please use vm5_entity_translations.translator instead.</deprecated>
         </service>
 
         <service id="vm5_entity_translations.doctrine.translation_loader"
