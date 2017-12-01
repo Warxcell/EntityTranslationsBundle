@@ -31,14 +31,16 @@
             <argument type="service" id="translator"/>
         </service>
 
-        <service class="VM5\EntityTranslationsBundle\Twig\Extension\TranslationExtension"
+        <service id="VM5\EntityTranslationsBundle\Twig\Extension\TranslationExtension"
+                 class="VM5\EntityTranslationsBundle\Form\Type\TranslationsType"
                  public="false">
             <argument type="service" id="vm5_entity_translations.translator"/>
             <argument type="service" id="property_accessor"/>
             <tag name="twig.extension"/>
         </service>
 
-        <service class="VM5\EntityTranslationsBundle\Form\Type\TranslationsType"
+        <service id="VM5\EntityTranslationsBundle\Form\Type\TranslationsType"
+                 class="VM5\EntityTranslationsBundle\Form\Type\TranslationsType"
                  public="false">
             <argument type="service" id="property_accessor"/>
             <argument type="service" id="doctrine"/>
