@@ -1,5 +1,7 @@
 # EntityTranslationsBundle
 
+[![Build Status](https://travis-ci.org/vm5/EntityTranslationsBundle.png)](https://travis-ci.org/vm5/EntityTranslationsBundle)
+
 Very simple bundle that allows you to translate your entities.
 
 ## Installation:
