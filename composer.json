@@ -11,13 +11,11 @@
   "keywords": [
     "translation"
   ],
-  "require": {
-    "doctrine/orm": "~2.0"
-  },
   "require-dev": {
     "phpunit/phpunit": "^5.7"
   },
   "suggest": {
+    "doctrine/orm": "Autoload translations with Doctrine ORM",
     "symfony/symfony": "Needed for easy integration into Symfony",
     "twig/twig": "Needed to use Twig Extension to translate in twig.",
     "symfony/property-access": "Needed for Twig extension to translate",

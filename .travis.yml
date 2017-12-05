@@ -7,4 +7,3 @@ php:
 
 before_script:
   - 'composer update'
-  - "composer suggests | xargs -I '{}' composer require '{}'"
