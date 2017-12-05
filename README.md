@@ -332,7 +332,7 @@ class NewsTranslationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            'name',
+            'title',
             TextType::class,
             [
                 'required' => false,
