@@ -320,6 +320,34 @@ use VM5\EntityTranslationsBundle\Model\EditableTranslation;
 class NewsTranslation implements EditableTranslation
 ```
 
+You need to create translation's form.
+```php
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class NewsTranslationType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add(
+            'name',
+            TextType::class,
+            [
+                'required' => false,
+            ]
+        );
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefault('data_class', NewsTranslation::class); // this is important
+    }
+}
+
+```
+
 And then you can:
 
 ```php
@@ -328,10 +356,12 @@ And then you can:
     \VM5\EntityTranslationsBundle\Form\Type\TranslationsType::class,
     [
         'entry_type' => NewsTranslationType::class,
-        'em' => 'manager_name',
+        'em' => 'manager_name', // optional
         'query_builder' => function(EntityRepository $repo) {
             return $repo->createQueryBuilder('languages');
-        }
+        } // optional
     ]
 )
 ```
+
+in your main form
