@@ -16,7 +16,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="SCPay Test Suite">
+        <testsuite name="EntityTranslations Test Suite">
             <directory>./Tests/</directory>
         </testsuite>
     </testsuites>
