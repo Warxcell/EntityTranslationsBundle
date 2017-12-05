@@ -6,5 +6,5 @@ php:
   - '7.1'
 
 before_script:
-  - 'composer suggests | xargs -i composer require {}'
   - 'composer update'
+  - "composer suggests | xargs -I '{}' composer require '{}'"
