@@ -143,7 +143,7 @@ class News implements Translatable
     /**
     * This method is used by bundle to inject current translation.
     */
-    public function setCurrentTranslation(Translation $translation) 
+    public function setCurrentTranslation(Translation $translation = null) 
     {
         $this->currentTranslation = $translation;
     }

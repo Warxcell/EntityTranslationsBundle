@@ -45,6 +45,8 @@ class Translator
 
         $translation = $this->getTranslation($entity, $languageOrLocale);
         if (!$translation) {
+            $entity->setCurrentTranslation(null);
+
             return false;
         }
         $entity->setCurrentTranslation($translation);
@@ -61,22 +63,20 @@ class Translator
     {
         $translations = $entity->getTranslations();
 
-        $translation = $translations->filter(
-            function (Translation $item) use ($languageOrLocale) {
-                $translationLanguage = $item->getLanguage();
-                if ($languageOrLocale instanceof Language) {
-                    return $translationLanguage === $languageOrLocale;
-                } else {
-                    return $translationLanguage->getLocale() === $languageOrLocale;
-                }
+        foreach ($translations as $translation) {
+            if ($this->checkLanguageOfEntity($translation, $languageOrLocale)) {
+                return $translation;
             }
-        )->first();
-        if ($translation === false) {
-            return null;
-
         }
 
-        return $translation;
+        return null;
+    }
+
+    private function checkLanguageOfEntity(Translation $translation, $languageOrLocale)
+    {
+        return
+            ($languageOrLocale instanceof Language && $translation->getLanguage() === $languageOrLocale)
+            || $translation->getLanguage()->getLocale() == $languageOrLocale;
     }
 
     public function initializeCurrentTranslation(Translatable $entity)

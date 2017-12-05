@@ -13,5 +13,5 @@ interface Translatable
      * @param Translation $translation
      * @return mixed
      */
-    public function setCurrentTranslation(Translation $translation);
+    public function setCurrentTranslation(Translation $translation = null);
 }
