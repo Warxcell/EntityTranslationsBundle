@@ -183,4 +183,41 @@ class TranslatorTest extends TestCase
         $this->assertEquals($newsTranslationEnglish, $news->getCurrentTranslation());
         $this->assertEquals('This is title in english', $news->getCurrentTranslation()->getTitle());
     }
+
+    public function testGetTranslationIndependentlyOfCurrentTranslation()
+    {
+        $englishLanguage = new Language('en');
+        $bulgarianLanguage = new Language('bg');
+
+        $newsTranslationEnglish = new NewsTranslation($englishLanguage, 'This is title in english');
+        $newsTranslationBulgarian = new NewsTranslation($bulgarianLanguage, 'Това е заглавие на български');
+
+        $news = new News(
+            [
+                $newsTranslationEnglish,
+                $newsTranslationBulgarian,
+            ]
+        );
+
+        $translator = new Translator('en');
+        $loadedLocale = $translator->initializeCurrentTranslation($news);
+
+        /** @var NewsTranslation $bgTranslation */
+        $bgTranslation = $translator->getTranslation($news, 'bg');
+
+        $fiTranslation = $translator->getTranslation($news, 'fi');
+
+
+        $this->assertEquals('en', $loadedLocale);
+
+        $this->assertNotNull($news->getCurrentTranslation());
+        $this->assertEquals($newsTranslationEnglish, $news->getCurrentTranslation());
+        $this->assertEquals('This is title in english', $news->getCurrentTranslation()->getTitle());
+
+        $this->assertNotNull($bgTranslation);
+        $this->assertEquals($newsTranslationBulgarian, $bgTranslation);
+        $this->assertEquals('Това е заглавие на български', $bgTranslation->getTitle());
+
+        $this->assertNull($fiTranslation);
+    }
 }

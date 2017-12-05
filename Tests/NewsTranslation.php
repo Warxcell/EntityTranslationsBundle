@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bozhidar.hristov
- * Date: 5.12.17
- * Time: 11:10
- */
 
 namespace VM5\EntityTranslationsBundle\Tests;
 
@@ -18,12 +12,15 @@ class NewsTranslation implements Translation
      */
     private $language;
 
+    /**
+     * @var string
+     */
     private $title;
 
     /**
      * NewsTranslation constructor.
      * @param Language $language
-     * @param $title
+     * @param string $title
      */
     public function __construct(Language $language, $title)
     {

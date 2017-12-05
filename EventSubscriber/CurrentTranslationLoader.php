@@ -37,10 +37,8 @@ class CurrentTranslationLoader implements EventSubscriber
     public function postLoad(LifecycleEventArgs $Event)
     {
         $entity = $Event->getEntity();
-        if (!$entity instanceof Translatable) {
-            return;
+        if ($entity instanceof Translatable) {
+            $this->translator->initializeCurrentTranslation($entity);
         }
-
-        $this->translator->initializeCurrentTranslation($entity);
     }
 }

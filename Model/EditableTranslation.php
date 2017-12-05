@@ -7,13 +7,13 @@ interface EditableTranslation extends Translation
 {
     /**
      * @param Translatable $translatable
-     * @return mixed
+     * @return void
      */
     public function setTranslatable(Translatable $translatable);
 
     /**
      * @param Language $language
-     * @return mixed
+     * @return void
      */
     public function setLanguage(Language $language);
 }
