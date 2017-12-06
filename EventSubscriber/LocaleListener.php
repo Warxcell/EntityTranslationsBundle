@@ -49,7 +49,7 @@ class LocaleListener implements EventSubscriberInterface
     {
         $this->entityTranslator->setLocale($this->translator->getLocale());
 
-        if ($this->translator instanceof Translator) {
+        if (method_exists($this->translator, 'getFallbackLocales')) {
             $this->entityTranslator->setFallbackLocales($this->translator->getFallbackLocales());
         }
     }
