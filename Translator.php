@@ -44,14 +44,9 @@ class Translator
         $this->managed[$this->getId($entity)] = $entity;
 
         $translation = $this->getTranslation($entity, $languageOrLocale);
-        if (!$translation) {
-            $entity->setCurrentTranslation(null);
-
-            return false;
-        }
         $entity->setCurrentTranslation($translation);
 
-        return true;
+        return $translation !== null;
     }
 
     /**
@@ -72,6 +67,11 @@ class Translator
         return null;
     }
 
+    /**
+     * @param Translation $translation
+     * @param $languageOrLocale
+     * @return bool
+     */
     private function checkLanguageOfEntity(Translation $translation, $languageOrLocale)
     {
         return
@@ -79,6 +79,10 @@ class Translator
             || $translation->getLanguage()->getLocale() == $languageOrLocale;
     }
 
+    /**
+     * @param Translatable $entity
+     * @return null|string
+     */
     public function initializeCurrentTranslation(Translatable $entity)
     {
         $currentLocale = $this->getLocale();
@@ -91,6 +95,9 @@ class Translator
         return $currentLocale;
     }
 
+    /**
+     * @param $locale
+     */
     public function setLocale($locale)
     {
         $this->locale = $locale;
