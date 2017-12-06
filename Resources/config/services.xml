@@ -25,14 +25,19 @@
             <tag name="doctrine.event_subscriber"/>
         </service>
 
-        <service id="vm5_entity_translations.locale_loader"
-                 class="VM5\EntityTranslationsBundle\EventSubscriber\LocaleListener"
-                 public="true">
-            <tag name="kernel.event_subscriber"/>
+        <service id="VM5\EntityTranslationsBundle\Guesser\GuesserLoader"
+                 class="VM5\EntityTranslationsBundle\Guesser\GuesserLoader">
             <argument type="service" id="vm5_entity_translations.translator"/>
             <argument type="collection">
                 <argument type="service" id="VM5\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser"/>
             </argument>
+        </service>
+
+        <service id="vm5_entity_translations.locale_loader"
+                 class="VM5\EntityTranslationsBundle\EventSubscriber\LocaleListener"
+                 public="true">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="VM5\EntityTranslationsBundle\Guesser\GuesserLoader"/>
         </service>
 
         <service id="VM5\EntityTranslationsBundle\Twig\Extension\TranslationExtension"
