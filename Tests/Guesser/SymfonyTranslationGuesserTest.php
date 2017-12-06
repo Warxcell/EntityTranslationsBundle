@@ -3,6 +3,7 @@
 namespace VM5\EntityTranslationsBundle\Tests\Guesser;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\Translator;
 use VM5\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser;
 
@@ -27,5 +28,14 @@ class TranslatorTest extends TestCase
         $guesser = new SymfonyTranslationGuesser($symfonyTranslator);
 
         $this->assertEquals($fallbackLocales, $guesser->guessFallbackLocales());
+    }
+
+    public function testTranslatorWithoutFallbackLocales()
+    {
+        $identityTranslator = new IdentityTranslator();
+        $identityTranslator->setLocale('bg');
+
+        $guesser = new SymfonyTranslationGuesser($identityTranslator);
+        $this->assertNull($guesser->guessFallbackLocales());
     }
 }

@@ -29,13 +29,20 @@ class GuesserLoader
 
     public function load()
     {
+        $localeLoaded = false;
+        $fallbackLocalesLoaded = false;
+
         foreach ($this->guessers as $guesser) {
             $locale = $guesser->guessLocale();
-            $this->entityTranslator->setLocale($locale);
+            if ($localeLoaded === false && $locale !== null) {
+                $this->entityTranslator->setLocale($locale);
+                $localeLoaded = true;
+            }
 
             $fallbackLocales = $guesser->guessFallbackLocales();
-            if ($fallbackLocales !== null) {
+            if ($fallbackLocalesLoaded === false && $fallbackLocales !== null) {
                 $this->entityTranslator->setFallbackLocales($fallbackLocales);
+                $fallbackLocalesLoaded = true;
             }
         }
     }

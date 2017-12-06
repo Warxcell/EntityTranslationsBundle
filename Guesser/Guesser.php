@@ -6,7 +6,7 @@ namespace VM5\EntityTranslationsBundle\Guesser;
 interface Guesser
 {
     /**
-     * @return string
+     * @return string|null
      */
     public function guessLocale();
 

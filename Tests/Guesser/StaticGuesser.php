@@ -28,7 +28,7 @@ class StaticGuesser implements Guesser
      * @param $locale
      * @param $fallbackLocales
      */
-    public function __construct($locale, $fallbackLocales = null)
+    public function __construct($locale = null, $fallbackLocales = null)
     {
         $this->locale = $locale;
         $this->fallbackLocales = $fallbackLocales;
