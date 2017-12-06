@@ -28,7 +28,7 @@ class Translator
      * @param string $locale
      * @param array $fallbackLocales
      */
-    public function __construct($locale = 'en', array $fallbackLocales = [])
+    public function __construct($locale, array $fallbackLocales = [])
     {
         $this->setLocale($locale);
         $this->fallbackLocales = $fallbackLocales;

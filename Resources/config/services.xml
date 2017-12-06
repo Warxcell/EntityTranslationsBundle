@@ -13,7 +13,9 @@
         <service id="vm5_entity_translations.translation_loader"
                  class="VM5\EntityTranslationsBundle\Translator"
                  public="true">
-            <deprecated>The "%service_id%" service is deprecated since 1.2 and will be removed in 2.0. Please use vm5_entity_translations.translator instead.</deprecated>
+            <deprecated>The "%service_id%" service is deprecated since 1.2 and will be removed in 2.0. Please use
+                vm5_entity_translations.translator instead.
+            </deprecated>
         </service>
 
         <service id="vm5_entity_translations.doctrine.translation_loader"
@@ -28,7 +30,9 @@
                  public="true">
             <tag name="kernel.event_subscriber"/>
             <argument type="service" id="vm5_entity_translations.translator"/>
-            <argument type="service" id="translator"/>
+            <argument type="collection">
+                <argument type="service" id="VM5\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser"/>
+            </argument>
         </service>
 
         <service id="VM5\EntityTranslationsBundle\Twig\Extension\TranslationExtension"
@@ -44,6 +48,11 @@
                  public="false">
             <argument type="service" id="property_accessor"/>
             <argument type="service" id="doctrine"/>
+        </service>
+
+        <service id="VM5\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser"
+                 class="VM5\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser">
+            <argument type="service" id="translator"/>
         </service>
     </services>
 </container>

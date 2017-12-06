@@ -5,8 +5,7 @@ namespace VM5\EntityTranslationsBundle\EventSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\TranslatorInterface;
+use VM5\EntityTranslationsBundle\Guesser\Guesser;
 use VM5\EntityTranslationsBundle\Translator as EntityTranslator;
 
 class LocaleListener implements EventSubscriberInterface
@@ -17,19 +16,19 @@ class LocaleListener implements EventSubscriberInterface
     private $entityTranslator;
 
     /**
-     * @var TranslatorInterface
+     * @var Guesser[]
      */
-    private $translator;
+    private $guessers = [];
 
     /**
      * LocaleListener constructor.
-     * @param EntityTranslator $currentTranslationLoader
-     * @param TranslatorInterface $translator
+     * @param EntityTranslator $entityTranslator
+     * @param Guesser[] $guessers
      */
-    public function __construct(EntityTranslator $currentTranslationLoader, TranslatorInterface $translator)
+    public function __construct(EntityTranslator $entityTranslator, array $guessers)
     {
-        $this->entityTranslator = $currentTranslationLoader;
-        $this->translator = $translator;
+        $this->entityTranslator = $entityTranslator;
+        $this->guessers = $guessers;
     }
 
     /**
@@ -47,10 +46,14 @@ class LocaleListener implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $this->entityTranslator->setLocale($this->translator->getLocale());
+        foreach ($this->guessers as $guesser) {
+            $locale = $guesser->guessLocale();
+            $this->entityTranslator->setLocale($locale);
 
-        if (method_exists($this->translator, 'getFallbackLocales')) {
-            $this->entityTranslator->setFallbackLocales($this->translator->getFallbackLocales());
+            $fallbackLocales = $guesser->guessFallbackLocales();
+            if ($fallbackLocales !== null) {
+                $this->entityTranslator->setFallbackLocales($fallbackLocales);
+            }
         }
     }
 }
