@@ -5,7 +5,7 @@
 Very simple bundle that allows you to translate your entities.
 
 ## Installation: 
-###### it is recommented to install X.Y.* version - This project follow <a target="_blank" href="https://semver.org/">semver</a> - Minor versions will be always compatible with each other. Minor versions may contain minor BC-breaks.
+###### it is recommented to install X.Y.* version - This project follow <a target="_blank" href="https://semver.org/">semver</a> - Patch versions will be always compatible with each other. Minor versions may contain minor BC-breaks.
 - composer require vm5/entity-translations-bundle
 - Register bundle in AppKernel.php: `new VM5\EntityTranslationsBundle\VM5EntityTranslationsBundle()`
 - Translatable must `implements \VM5\EntityTranslationsBundle\Model\Translatable`
