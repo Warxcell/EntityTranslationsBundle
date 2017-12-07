@@ -15,6 +15,15 @@ class LocaleListener implements EventSubscriberInterface
     private $guessLoader;
 
     /**
+     * LocaleListener constructor.
+     * @param GuesserLoader $guessLoader
+     */
+    public function __construct(GuesserLoader $guessLoader)
+    {
+        $this->guessLoader = $guessLoader;
+    }
+
+    /**
      * @return array
      */
     public static function getSubscribedEvents()
