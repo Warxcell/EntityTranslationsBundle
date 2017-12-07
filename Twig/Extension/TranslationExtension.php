@@ -31,6 +31,9 @@ class TranslationExtension extends \Twig_Extension
         $this->propertyAccessor = $propertyAccessor;
     }
 
+    /**
+     * @return \Twig_SimpleFilter[]
+     */
     public function getFilters()
     {
         return [
@@ -39,12 +42,22 @@ class TranslationExtension extends \Twig_Extension
         ];
     }
 
-
+    /**
+     * @param Translatable $translatable
+     * @param string $locale
+     * @return null|\VM5\EntityTranslationsBundle\Model\Translation
+     */
     public function getTranslation(Translatable $translatable, $locale)
     {
         return $this->translator->getTranslation($translatable, $locale);
     }
 
+    /**
+     * @param Translatable $translatable
+     * @param string $locale
+     * @param string $field
+     * @return null|string
+     */
     public function translate(Translatable $translatable, $locale, $field)
     {
         $translation = $this->translator->getTranslation($translatable, $locale);
