@@ -1,6 +1,6 @@
 {
   "name": "vm5/entity-translations-bundle",
-  "description": "This bundle provides Tranlations for entities in your project. It's a bundle, but can be used standalone.",
+  "description": "This bundle provides translations for entities in your project. It's a bundle, but can be used standalone.",
   "type": "symfony-bundle",
   "authors": [
     {
