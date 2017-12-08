@@ -34,6 +34,11 @@ class ResizeFormListener implements EventSubscriberInterface
     private $languages = [];
 
     /**
+     * @var array
+     */
+    private $forDelete = [];
+
+    /**
      * ResizeFormListener constructor.
      * @param string $type
      * @param array $options
@@ -56,6 +61,7 @@ class ResizeFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::PRE_SUBMIT => 'preSubmit',
             FormEvents::SUBMIT => 'submit',
         );
     }
@@ -116,6 +122,32 @@ class ResizeFormListener implements EventSubscriberInterface
         $event->setData($newData);
     }
 
+    public function preSubmit(FormEvent $event)
+    {
+        $translations = $event->getData();
+
+        $isEmpty = function ($data) use (&$isEmpty) {
+            if (is_array($data)) {
+                foreach ($data as $each) {
+                    if (!$isEmpty($each)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            return empty($data);
+        };
+
+        foreach ($this->languages as $language) {
+            $translation = $translations[$language->getLocale()];
+            if ($isEmpty($translation)) {
+                $this->forDelete[] = $language->getLocale();
+            }
+        }
+    }
+
     public function submit(FormEvent $event)
     {
         /** @var EditableTranslation[] $translations */
@@ -136,6 +168,9 @@ class ResizeFormListener implements EventSubscriberInterface
             }
         }
         foreach ($forDelete as $item) {
+            unset($translations[$item]);
+        }
+        foreach ($this->forDelete as $item) {
             unset($translations[$item]);
         }
 
