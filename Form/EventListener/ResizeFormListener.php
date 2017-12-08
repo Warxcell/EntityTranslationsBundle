@@ -70,7 +70,7 @@ class ResizeFormListener implements EventSubscriberInterface
     {
         $options = $this->options;
         $options['validation_groups'] = function (FormInterface $form) {
-            if ($form->isEmpty() && !$form->isRequired()) {
+            if (($form->isEmpty() || isset($this->forDelete[$form->getName()])) && !$form->isRequired()) {
                 return false;
             } else {
                 return ['Default', $form->getName()];
