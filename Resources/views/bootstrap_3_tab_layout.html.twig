@@ -1,4 +1,6 @@
 {% block translations_row %}
+    {{ form_label(form) }}
+
     {{ block('nav_tabs') }}
 
     {{ block('tab_contents') }}
@@ -27,6 +29,8 @@
             {{ block('tab_content') }}
         {% endfor %}
     </div>
+
+    {{ form_errors(form) }}
 {% endblock %}
 
 {% block tab_content %}
