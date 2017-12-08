@@ -1,0 +1,37 @@
+{% block translations_row %}
+    {{ block('nav_tabs') }}
+
+    {{ block('tab_contents') }}
+{% endblock %}
+
+{% block nav_tabs %}
+    <ul class="nav nav-tabs">
+        {% for key, child in form %}
+            {{ block('nav_tab') }}
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block nav_tab %}
+    <li {% if loop.first %}class="active"{% endif %}>
+        <a data-toggle="tab" href="#{{ key }}"
+           class="{% if not child.vars.valid %}label label-danger{% endif %}">
+            {{ form_label(child) }}
+        </a>
+    </li>
+{% endblock %}
+
+{% block tab_contents %}
+    <div class="tab-content">
+        {% for key, child in form %}
+            {{ block('tab_content') }}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block tab_content %}
+    <div id="{{ key }}" class="tab-pane fade {% if loop.first %}in active{% endif %}">
+        {{ form_widget(child) }}
+        {{ form_errors(child) }}
+    </div>
+{% endblock %}
