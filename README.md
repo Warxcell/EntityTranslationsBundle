@@ -339,12 +339,12 @@ class NewsTranslationType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new NotBlank(),
-                    new SomeChineseSymbolConstraint([
+                    new SomeBulgarianSymbolConstraint([
                         'groups'=> ['bg']
                     ]) // This will be validated only on bg locale
                     new SomeChineseSymbolConstraint([
                         'groups'=> ['zh']
-                    ])  // This will be validated only on bg locale
+                    ])  // This will be validated only on zh locale
                 ],
             ]
         );
