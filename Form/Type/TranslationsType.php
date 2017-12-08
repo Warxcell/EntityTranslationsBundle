@@ -8,7 +8,6 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use VM5\EntityTranslationsBundle\Form\EventListener\ResizeFormListener;
 use VM5\EntityTranslationsBundle\Model\Language;
 
@@ -22,11 +21,9 @@ class TranslationsType extends AbstractType
 
     /**
      * TranslationsType constructor.
-     * @param PropertyAccessorInterface|null $propertyAccessor
      * @param ManagerRegistry $managerRegistry
      */
     public function __construct(
-        PropertyAccessorInterface $propertyAccessor = null,
         ManagerRegistry $managerRegistry
     ) {
         $this->managerRegistry = $managerRegistry;
