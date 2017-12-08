@@ -337,6 +337,15 @@ class NewsTranslationType extends AbstractType
             TextType::class,
             [
                 'required' => false,
+                'constraints' => [
+                    new NotBlank(),
+                    new SomeChineseSymbolConstraint([
+                        'groups'=> ['bg']
+                    ]) // This will be validated only on bg locale
+                    new SomeChineseSymbolConstraint([
+                        'groups'=> ['zh']
+                    ])  // This will be validated only on bg locale
+                ],
             ]
         );
     }
@@ -344,6 +353,13 @@ class NewsTranslationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefault('data_class', NewsTranslation::class); // this is important
+        $resolver->setDefault('constraints', [
+            new NotNull(
+                [
+                    'groups' => ['en'], // make only english required
+                ]
+            ),
+        ]);
     }
 }
 
@@ -361,8 +377,18 @@ And then you can:
         'query_builder' => function(EntityRepository $repo) {
             return $repo->createQueryBuilder('languages');
         } // optional
+        'entry_language_options' => [
+            'en' => [
+                'required' => true,
+            ]
+        ],
     ]
 )
 ```
 
-in your main form
+in your main form.
+
+It's important to include `required` in `entry_language_options` for specific locales, because validation is triggered 
+only when language is not empty and it's required. 
+
+Language is assumed as not empty when at least one of the fields are filled in.
