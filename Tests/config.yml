@@ -23,6 +23,6 @@ doctrine:
         mappings:
             VM5EntityTranslationsTests:
                 type: annotation
-                dir: '%kernel.root_dir%/Tests/Entity'
+                dir: '%kernel.root_dir%/Entity'
                 is_bundle: false
                 prefix: VM5\EntityTranslationsBundle\Tests\Entity
