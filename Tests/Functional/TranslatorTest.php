@@ -2,8 +2,8 @@
 
 namespace VM5\EntityTranslationsBundle\Tests\Functional;
 
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use VM5\EntityTranslationsBundle\Tests\Language;
