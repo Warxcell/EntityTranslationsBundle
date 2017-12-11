@@ -1,0 +1,4 @@
+vm5_sc_pay:
+    resource: "Functional/Controller/"
+    type: annotation
+    prefix:   /
