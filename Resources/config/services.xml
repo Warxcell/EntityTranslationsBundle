@@ -20,7 +20,6 @@
                  class="VM5\EntityTranslationsBundle\Translator"
                  public="true">
             <argument>en</argument>
-            <deprecated>The "%service_id%" service is deprecated since 1.2 and will be removed in 2.0. Please use vm5_entity_translations.translator instead.</deprecated>
         </service>
 
         <service id="vm5_entity_translations.doctrine.translation_loader"

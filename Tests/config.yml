@@ -3,7 +3,7 @@ framework:
     secret: dsaijdsauhduash
     default_locale: 'bg'
     translator:
-        fallbacks: ['en', 'bg']
+        fallbacks: ['en', 'fi']
     router:
         resource: "%kernel.root_dir%/routing.yml"
         strict_requirements: ~
@@ -17,3 +17,9 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        mappings:
+            VM5EntityTranslationsTests:
+                type: annotation
+                dir: .
+                is_bundle: false
+                prefix: VM5\EntityTranslationsBundle\Tests

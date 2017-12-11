@@ -1,4 +1,4 @@
-vm5_sc_pay:
+vm5_entity_translations_tests:
     resource: "Functional/Controller/"
     type: annotation
     prefix:   /

@@ -8,12 +8,9 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array();
-
-        if (in_array($this->getEnvironment(), array('test'))) {
-            $bundles[] = new \Symfony\Bundle\FrameworkBundle\FrameworkBundle();
-            $bundles[] = new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle();
-            $bundles[] = new \VM5\EntityTranslationsBundle\VM5EntityTranslationsBundle();
-        }
+        $bundles[] = new \Symfony\Bundle\FrameworkBundle\FrameworkBundle();
+        $bundles[] = new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle();
+        $bundles[] = new \VM5\EntityTranslationsBundle\VM5EntityTranslationsBundle();
 
         return $bundles;
     }
