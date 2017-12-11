@@ -1,6 +1,6 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests;
+namespace VM5\EntityTranslationsBundle\Tests\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use VM5\EntityTranslationsBundle\Model\Translation;
@@ -15,14 +15,15 @@ class NewsTranslation implements Translation
     /**
      * @var Language
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity=VM5\EntityTranslationsBundle\Tests\Language")
+     * @ORM\ManyToOne(targetEntity="Language")
+     * @ORM\JoinColumn(referencedColumnName="locale")
      */
     private $language;
 
     /**
      * @var News
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="News")
+     * @ORM\ManyToOne(targetEntity="News", inversedBy="translations")
      */
     private $translatable;
 

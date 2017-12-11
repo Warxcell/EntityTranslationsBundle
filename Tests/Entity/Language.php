@@ -1,6 +1,6 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests;
+namespace VM5\EntityTranslationsBundle\Tests\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

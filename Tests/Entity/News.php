@@ -1,6 +1,6 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests;
+namespace VM5\EntityTranslationsBundle\Tests\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,13 +17,14 @@ class News implements Translatable
     /**
      * @var int
      * @ORM\Id()
-     * @ORM\Column()
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue()
      */
     private $id;
 
     /**
      * @var NewsTranslation[]|ArrayCollection
-     * @ORM\OneToMany(targetEntity="NewsTranslation")
+     * @ORM\OneToMany(targetEntity="NewsTranslation", mappedBy="translatable", cascade={"persist"}, orphanRemoval=true)
      */
     private $translations;
 
@@ -39,6 +40,9 @@ class News implements Translatable
     public function __construct(array $translations)
     {
         $this->translations = new ArrayCollection($translations);
+        foreach ($this->translations as $translation) {
+            $translation->setTranslatable($this);
+        }
     }
 
     /**

@@ -6,9 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use VM5\EntityTranslationsBundle\Tests\Language;
-use VM5\EntityTranslationsBundle\Tests\News;
-use VM5\EntityTranslationsBundle\Tests\NewsTranslation;
+use VM5\EntityTranslationsBundle\Tests\Entity\Language;
+use VM5\EntityTranslationsBundle\Tests\Entity\News;
+use VM5\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
 use VM5\EntityTranslationsBundle\Translator;
 
 class TranslatorTest extends WebTestCase
@@ -83,14 +83,14 @@ class TranslatorTest extends WebTestCase
 
         $em->persist($news);
         $em->flush();
-
+        $em->clear();
 
         /** @var Translator $translator */
         $translator = $container->get(Translator::class);
 
         $this->assertEquals('en', $translator->getLocale());
 
-        $client->request(
+        $crawler = $client->request(
             'GET',
             sprintf('/news/%s', $news->getId()),
             [
@@ -100,7 +100,6 @@ class TranslatorTest extends WebTestCase
 
         $response = $client->getResponse();
 
-        $this->assertEquals('bg', $translator->getLocale());
-        $this->assertEquals(['en', 'bg'], $translator->getFallbackLocales());
+        $this->assertEquals('Това е заглавие на български', $response->getContent());
     }
 }

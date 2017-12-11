@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use VM5\EntityTranslationsBundle\Tests\News;
+use VM5\EntityTranslationsBundle\Tests\Entity\News;
 
 class NewsController extends Controller
 {

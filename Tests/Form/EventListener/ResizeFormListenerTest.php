@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
 use VM5\EntityTranslationsBundle\Form\EventListener\ResizeFormListener;
-use VM5\EntityTranslationsBundle\Tests\Language;
+use VM5\EntityTranslationsBundle\Tests\Entity\Language;
 
 class ResizeFormListenerTest extends TestCase
 {

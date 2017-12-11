@@ -1,3 +1,6 @@
+imports:
+    - { resource: "@VM5EntityTranslationsBundle/Resources/config/services.xml" }
+
 framework:
     test: ~
     secret: dsaijdsauhduash
@@ -20,6 +23,6 @@ doctrine:
         mappings:
             VM5EntityTranslationsTests:
                 type: annotation
-                dir: .
+                dir: '%kernel.project_dir%/Tests/Entity'
                 is_bundle: false
-                prefix: VM5\EntityTranslationsBundle\Tests
+                prefix: VM5\EntityTranslationsBundle\Tests\Entity

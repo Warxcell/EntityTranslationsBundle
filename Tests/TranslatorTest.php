@@ -3,6 +3,9 @@
 namespace VM5\EntityTranslationsBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
+use VM5\EntityTranslationsBundle\Tests\Entity\Language;
+use VM5\EntityTranslationsBundle\Tests\Entity\News;
+use VM5\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
 use VM5\EntityTranslationsBundle\Translator;
 
 class TranslatorTest extends TestCase
