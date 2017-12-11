@@ -1,4 +1,7 @@
-vm5_entity_translations_tests:
-    resource: "Functional/Controller/"
-    type: annotation
-    prefix:   /
+index:
+    path:     /
+    defaults: { _controller: news_controller:indexAction }
+
+news_read:
+    path:     /news/{id}
+    defaults: { _controller: news_controller:newsReadAction }

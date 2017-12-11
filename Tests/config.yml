@@ -26,3 +26,10 @@ doctrine:
                 dir: '%kernel.root_dir%/Entity'
                 is_bundle: false
                 prefix: VM5\EntityTranslationsBundle\Tests\Entity
+
+
+services:
+    news_controller:
+        class: VM5\EntityTranslationsBundle\Tests\Functional\Controller\NewsController
+        arguments:
+          - '@doctrine'
