@@ -29,6 +29,7 @@ class NewsTranslation implements Translation
 
     /**
      * @var string
+     * @ORM\Column()
      */
     private $title;
 
