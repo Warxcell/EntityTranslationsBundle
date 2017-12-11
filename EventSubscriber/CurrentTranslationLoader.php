@@ -28,15 +28,26 @@ class CurrentTranslationLoader implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array('postLoad');
+        return array(
+            'postLoad',
+            'postPersist',
+        );
     }
 
     /**
-     * @param LifecycleEventArgs $Event
+     * @param LifecycleEventArgs $eventArgs
      */
-    public function postLoad(LifecycleEventArgs $Event)
+    public function postLoad(LifecycleEventArgs $eventArgs)
     {
-        $entity = $Event->getEntity();
+        $entity = $eventArgs->getEntity();
+        if ($entity instanceof Translatable) {
+            $this->translator->initializeCurrentTranslation($entity);
+        }
+    }
+
+    public function postPersist(LifecycleEventArgs $eventArgs)
+    {
+        $entity = $eventArgs->getEntity();
         if ($entity instanceof Translatable) {
             $this->translator->initializeCurrentTranslation($entity);
         }
