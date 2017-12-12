@@ -294,7 +294,8 @@ Argument #2 can be either string locale or Language entity.
 You can also use embedded Twig filters to translate in twig:
 
 ```twig
-{{ news|translate('en', 'title')|lower }}
+{{ news|translate('title')|lower }}
+{{ news|translate('title', 'en')|lower }}
 ```
 or get the whole translation:
 ```twig
