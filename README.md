@@ -322,6 +322,14 @@ use VM5\EntityTranslationsBundle\Model\EditableTranslation;
 class NewsTranslation implements EditableTranslation
 ```
 
+Load form theme (optionally)
+```yaml
+twig:
+    form_themes:
+        - '@VM5EntityTranslationsBundle::bootstrap_3_tab_layout.html.twig'
+```
+
+
 You need to create translation's form.
 ```php
 use Symfony\Component\Form\AbstractType;
