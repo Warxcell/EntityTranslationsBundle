@@ -7,16 +7,11 @@
 
     <services>
         <service id="vm5_entity_translations.translator"
-                 alias="vm5_entity_translations.translation_loader"
+                 alias="VM5\EntityTranslationsBundle\Translator"
                  public="true">
         </service>
 
         <service id="VM5\EntityTranslationsBundle\Translator"
-                 alias="vm5_entity_translations.translation_loader"
-                 public="true">
-        </service>
-
-        <service id="vm5_entity_translations.translation_loader"
                  class="VM5\EntityTranslationsBundle\Translator"
                  public="true">
             <argument>en</argument>
