@@ -2,7 +2,6 @@
 
 namespace VM5\EntityTranslationsBundle\Twig\Extension;
 
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 use VM5\EntityTranslationsBundle\Model\Translatable;
 use VM5\EntityTranslationsBundle\Translator;
 
@@ -14,21 +13,12 @@ class TranslationExtension extends \Twig_Extension
     private $translator;
 
     /**
-     * @var PropertyAccessor
-     */
-    private $propertyAccessor;
-
-    /**
      * LanguageExtension constructor.
      * @param Translator $translationService
-     * @param PropertyAccessor $propertyAccessor
      */
-    public function __construct(
-        Translator $translationService,
-        PropertyAccessor $propertyAccessor
-    ) {
+    public function __construct(Translator $translationService)
+    {
         $this->translator = $translationService;
-        $this->propertyAccessor = $propertyAccessor;
     }
 
     /**
