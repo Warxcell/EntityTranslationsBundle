@@ -58,13 +58,8 @@ class TranslationExtension extends \Twig_Extension
      * @param string $field
      * @return null|string
      */
-    public function translate(Translatable $translatable, $locale, $field)
+    public function translate(Translatable $translatable, $field, $locale = null)
     {
-        $translation = $this->translator->getTranslation($translatable, $locale);
-        if ($translation) {
-            return $this->propertyAccessor->getValue($translation, $field);
-        }
-
-        return null;
+        return $this->translator->translate($translatable, $field, $locale);
     }
 }

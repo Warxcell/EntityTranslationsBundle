@@ -20,6 +20,9 @@
                  class="VM5\EntityTranslationsBundle\Translator"
                  public="true">
             <argument>en</argument>
+            <call method="setPropertyAccessor">
+                <argument type="service" id="property_accessor" on-invalid="ignore"/>
+            </call>
         </service>
 
         <service id="vm5_entity_translations.doctrine.translation_loader"
@@ -48,7 +51,6 @@
                  class="VM5\EntityTranslationsBundle\Twig\Extension\TranslationExtension"
                  public="false">
             <argument type="service" id="vm5_entity_translations.translator"/>
-            <argument type="service" id="property_accessor"/>
             <tag name="twig.extension"/>
         </service>
 

@@ -3,6 +3,7 @@
 namespace VM5\EntityTranslationsBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use VM5\EntityTranslationsBundle\Tests\Entity\Language;
 use VM5\EntityTranslationsBundle\Tests\Entity\News;
 use VM5\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
@@ -222,5 +223,71 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Това е заглавие на български', $bgTranslation->getTitle());
 
         $this->assertNull($fiTranslation);
+    }
+
+    public function testTranslateCurrentLocale()
+    {
+        $englishLanguage = new Language('en');
+        $bulgarianLanguage = new Language('bg');
+
+        $newsTranslationEnglish = new NewsTranslation($englishLanguage, 'This is title in english');
+        $newsTranslationBulgarian = new NewsTranslation($bulgarianLanguage, 'Това е заглавие на български');
+
+        $news = new News(
+            [
+                $newsTranslationEnglish,
+                $newsTranslationBulgarian,
+            ]
+        );
+
+        $translator = new Translator('bg');
+        $translator->setPropertyAccessor(PropertyAccess::createPropertyAccessor());
+
+        $titleBg = $translator->translate($news, 'title');
+        $this->assertEquals('Това е заглавие на български', $titleBg);
+    }
+
+    public function testTranslateNotCurrentLocale()
+    {
+        $englishLanguage = new Language('en');
+        $bulgarianLanguage = new Language('bg');
+
+        $newsTranslationEnglish = new NewsTranslation($englishLanguage, 'This is title in english');
+        $newsTranslationBulgarian = new NewsTranslation($bulgarianLanguage, 'Това е заглавие на български');
+
+        $news = new News(
+            [
+                $newsTranslationEnglish,
+                $newsTranslationBulgarian,
+            ]
+        );
+
+        $translator = new Translator('bg');
+        $translator->setPropertyAccessor(PropertyAccess::createPropertyAccessor());
+
+        $titleFi = $translator->translate($news, 'title', 'fi');
+        $this->assertNull($titleFi);
+    }
+
+    public function testTranslateNotExistingTranslation()
+    {
+        $englishLanguage = new Language('en');
+        $bulgarianLanguage = new Language('bg');
+
+        $newsTranslationEnglish = new NewsTranslation($englishLanguage, 'This is title in english');
+        $newsTranslationBulgarian = new NewsTranslation($bulgarianLanguage, 'Това е заглавие на български');
+
+        $news = new News(
+            [
+                $newsTranslationEnglish,
+                $newsTranslationBulgarian,
+            ]
+        );
+
+        $translator = new Translator('bg');
+        $translator->setPropertyAccessor(PropertyAccess::createPropertyAccessor());
+
+        $titleFi = $translator->translate($news, 'title', 'fi');
+        $this->assertNull($titleFi);
     }
 }

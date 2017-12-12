@@ -2,6 +2,7 @@
 
 namespace VM5\EntityTranslationsBundle;
 
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use VM5\EntityTranslationsBundle\Model\Language;
 use VM5\EntityTranslationsBundle\Model\Translatable;
 use VM5\EntityTranslationsBundle\Model\Translation;
@@ -24,6 +25,11 @@ class Translator
     private $fallbackLocales = [];
 
     /**
+     * @var PropertyAccessor
+     */
+    private $propertyAccessor = null;
+
+    /**
      * Translator constructor.
      * @param string $locale
      * @param array $fallbackLocales
@@ -32,6 +38,11 @@ class Translator
     {
         $this->setLocale($locale);
         $this->fallbackLocales = $fallbackLocales;
+    }
+
+    public function setPropertyAccessor(PropertyAccessor $propertyAccessor)
+    {
+        $this->propertyAccessor = $propertyAccessor;
     }
 
     /**
@@ -62,6 +73,23 @@ class Translator
             if ($this->checkLanguageOfEntity($translation, $languageOrLocale)) {
                 return $translation;
             }
+        }
+
+        return null;
+    }
+
+    public function translate(Translatable $entity, $field, $locale = null)
+    {
+        if ($this->propertyAccessor === null) {
+            throw new \LogicException('PropertyAccessor is required in order to use '.__METHOD__);
+        }
+
+        if ($locale === null) {
+            $locale = $this->getLocale();
+        }
+        $translation = $this->getTranslation($entity, $locale);
+        if ($translation) {
+            return $this->propertyAccessor->getValue($translation, $field);
         }
 
         return null;
