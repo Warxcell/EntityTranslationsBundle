@@ -114,9 +114,7 @@ class Translator
     public function initializeCurrentTranslation(Translatable $entity)
     {
         $currentLocale = $this->getLocale();
-        $success = $this->initializeTranslation($entity, $currentLocale);
-
-        if ($success == false) {
+        if (!$this->initializeTranslation($entity, $currentLocale)) {
             $currentLocale = $this->initializeFallbackTranslation($entity);
         }
 
