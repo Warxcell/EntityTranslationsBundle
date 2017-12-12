@@ -41,10 +41,7 @@ class TranslatorTest extends WebTestCase
 
         $this->assertEquals('en', $translator->getLocale());
 
-        $client->request(
-            'GET',
-            '/'
-        );
+        $client->request('GET', '/');
 
         $this->assertEquals('bg', $translator->getLocale());
         $this->assertEquals(['en', 'fi'], $translator->getFallbackLocales());
@@ -63,13 +60,7 @@ class TranslatorTest extends WebTestCase
 
         $this->assertEquals('en', $translator->getLocale());
 
-        $client->request(
-            'GET',
-            '/',
-            [
-                '_locale' => 'fi',
-            ]
-        );
+        $client->request('GET', '/fi');
 
         $this->assertEquals('fi', $translator->getLocale());
         $this->assertEquals(['en', 'fi'], $translator->getFallbackLocales());
@@ -112,13 +103,7 @@ class TranslatorTest extends WebTestCase
 
         $this->assertEquals('en', $translator->getLocale());
 
-        $crawler = $client->request(
-            'GET',
-            sprintf('/news/%s', $news->getId()),
-            [
-                '_locale' => 'bg',
-            ]
-        );
+        $crawler = $client->request('GET', sprintf('/bg/news/%s', $news->getId()));
 
         $response = $client->getResponse();
 
