@@ -4,6 +4,7 @@ imports:
 framework:
     test: ~
     secret: dsaijdsauhduash
+    form: ~
     default_locale: 'bg'
     translator:
         fallbacks: ['en', 'fi']
@@ -26,6 +27,8 @@ doctrine:
                 dir: '%kernel.root_dir%/Entity'
                 is_bundle: false
                 prefix: VM5\EntityTranslationsBundle\Tests\Entity
+        resolve_target_entities:
+                    VM5\EntityTranslationsBundle\Model\Language: VM5\EntityTranslationsBundle\Tests\Entity\Language
 
 
 services:

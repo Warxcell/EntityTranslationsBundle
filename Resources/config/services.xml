@@ -50,9 +50,9 @@
         </service>
 
         <service id="VM5\EntityTranslationsBundle\Form\Type\TranslationsType"
-                 class="VM5\EntityTranslationsBundle\Form\Type\TranslationsType"
-                 public="false">
+                 class="VM5\EntityTranslationsBundle\Form\Type\TranslationsType">
             <argument type="service" id="doctrine"/>
+            <tag name="form.type"/>
         </service>
 
         <service id="VM5\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser"

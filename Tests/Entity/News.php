@@ -37,7 +37,7 @@ class News implements Translatable
      * News constructor.
      * @param NewsTranslation[] $translations
      */
-    public function __construct(array $translations)
+    public function __construct(array $translations = [])
     {
         $this->translations = new ArrayCollection($translations);
         foreach ($this->translations as $translation) {
@@ -71,6 +71,11 @@ class News implements Translatable
         return $this->currentTranslation;
     }
 
+    public function setTranslations($translations)
+    {
+        $this->translations = $translations;
+    }
+
     public function addTranslation(NewsTranslation $translation)
     {
         $this->getTranslations()->add($translation);
@@ -81,6 +86,15 @@ class News implements Translatable
     {
         if ($this->currentTranslation !== null) {
             return $this->currentTranslation->getTitle();
+        }
+
+        return null;
+    }
+
+    public function getDescription()
+    {
+        if ($this->currentTranslation !== null) {
+            return $this->currentTranslation->getDescription();
         }
 
         return null;
