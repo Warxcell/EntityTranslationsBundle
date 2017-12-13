@@ -52,7 +52,6 @@ class TranslationsType extends AbstractType
             /** @var Language[] $languages */
             $languages = $repository->findAll();
         }
-
         $resizeListener = new ResizeFormListener(
             $options['entry_type'],
             $options['entry_options'],
