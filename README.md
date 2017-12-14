@@ -137,10 +137,20 @@ class News implements Translatable
         return $this->translations;
     }
     
+    /**
+     * This is important, as form has default option: by_reference = false
+     * so here we set the mapped side entity. 
+     * @param Translation|null $translation
+     */
     public function addTranslation(NewsTranslation $translation) 
     {
         $this->getTranslations()->add($translation);
         $translation->setTranslatable($this);
+    }
+    
+    public function removeTranslation(NewsTranslation $translation)
+    {
+        $this->getTranslations()->removeElement($translation);
     }
 
     /**

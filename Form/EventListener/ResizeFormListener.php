@@ -143,8 +143,7 @@ class ResizeFormListener implements EventSubscriberInterface
         };
 
         foreach ($this->languages as $language) {
-            $translation = $translations[$language->getLocale()];
-            if ($isEmpty($translation)) {
+            if (isset($translations[$language->getLocale()]) && $isEmpty($translations[$language->getLocale()])) {
                 $this->forDelete[$language->getLocale()] = $language->getLocale();
             }
         }
@@ -165,7 +164,6 @@ class ResizeFormListener implements EventSubscriberInterface
                 $forDelete[] = $language->getLocale();
             } else {
                 $translation = $translations[$language->getLocale()];
-                $translation->setTranslatable($translatable);
                 $translation->setLanguage($language);
             }
         }

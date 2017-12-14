@@ -82,6 +82,11 @@ class News implements Translatable
         $translation->setTranslatable($this);
     }
 
+    public function removeTranslation(NewsTranslation $translation)
+    {
+        $this->getTranslations()->removeElement($translation);
+    }
+
     public function getTitle()
     {
         if ($this->currentTranslation !== null) {

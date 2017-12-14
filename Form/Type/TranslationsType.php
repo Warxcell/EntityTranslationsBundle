@@ -71,7 +71,7 @@ class TranslationsType extends AbstractType
         $options = [];
         $options['entry_options'] = [];
         $options['entry_language_options'] = [];
-        $options['by_reference'] = true;
+        $options['by_reference'] = false;
 
         $resolver->setDefaults($options);
     }
