@@ -60,6 +60,34 @@ class FormTest extends WebTestCase
         return $languages;
     }
 
+    /**
+     * @param Translation[] $translations
+     * @param $locale
+     * @return boolean
+     */
+    private function containsTranslation($translations, $locale)
+    {
+        foreach ($translations as $translation) {
+            if ($translation->getLanguage()->getLocale() == $locale) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param Translation[] $translations
+     * @param $locale
+     */
+    private function assertHasTranslation($translations, $locale)
+    {
+        $this->assertTrue(
+            $this->containsTranslation($translations, $locale),
+            sprintf('Does not contains %s translation', $locale)
+        );
+    }
+
     public function testFormWithEmptyRequiredEnglish()
     {
         $client = static::createClient();
@@ -68,7 +96,6 @@ class FormTest extends WebTestCase
 
         $this->buildDb($kernel);
         $this->insertLanguages($kernel);
-        $em = $kernel->getContainer()->get('doctrine')->getManager();
 
         $news = new News();
 
@@ -91,10 +118,6 @@ class FormTest extends WebTestCase
                     'title' => '',
                     'description' => '',
                 ],
-                'bg' => [
-                    'title' => '',
-                    'description' => '',
-                ],
                 'fi' => [
                     'title' => 'Finnish title',
                     'description' => 'Finnish description',
@@ -111,11 +134,9 @@ class FormTest extends WebTestCase
         $errors = $form->getErrors(true);
 
         $this->assertEquals(1, $errors->count());
-
-        foreach ($errors as $error) {
-            $this->assertEquals('children[translations].children[en].data', $error->getCause()->getPropertyPath());
-            $this->assertEquals('ad32d13f-c3d4-423b-909a-857b961eb720', $error->getCause()->getCode());
-        }
+        $error = $errors[0];
+        $this->assertEquals('children[translations].children[en].data', $error->getCause()->getPropertyPath());
+        $this->assertEquals('ad32d13f-c3d4-423b-909a-857b961eb720', $error->getCause()->getCode());
     }
 
     public function testFormWithEmptyTitle()
@@ -126,7 +147,6 @@ class FormTest extends WebTestCase
 
         $this->buildDb($kernel);
         $this->insertLanguages($kernel);
-        $em = $kernel->getContainer()->get('doctrine')->getManager();
 
         $news = new News();
 
@@ -163,22 +183,20 @@ class FormTest extends WebTestCase
         $form = $container->get('form.factory')->create(NewsType::class, $news, $options);
         $form->submit($data);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($news);
-            $em->flush();
-        }
+        $this->assertTrue($form->isSubmitted());
+        $this->assertFalse($form->isValid());
 
         $errors = $form->getErrors(true);
 
         $this->assertEquals(1, $errors->count());
 
-        foreach ($errors as $error) {
-            $this->assertEquals(
-                'children[translations].children[en].children[title].data',
-                $error->getCause()->getPropertyPath()
-            );
-            $this->assertEquals('c1051bb4-d103-4f74-8988-acbcafc7fdc3', $error->getCause()->getCode());
-        }
+        $error = $errors[0];
+
+        $this->assertEquals(
+            'children[translations].children[en].children[title].data',
+            $error->getCause()->getPropertyPath()
+        );
+        $this->assertEquals('c1051bb4-d103-4f74-8988-acbcafc7fdc3', $error->getCause()->getCode());
     }
 
     public function testSuccessInsertAllTranslations()
@@ -189,7 +207,6 @@ class FormTest extends WebTestCase
 
         $this->buildDb($kernel);
         $this->insertLanguages($kernel);
-        $em = $kernel->getContainer()->get('doctrine')->getManager();
 
         $news = new News();
 
@@ -234,25 +251,9 @@ class FormTest extends WebTestCase
         $this->assertTrue($form->isSubmitted());
         $this->assertTrue($form->isValid());
         $this->assertCount(3, $news->getTranslations());
-        $this->assertTrue($this->containsTranslation($news->getTranslations(), 'en'));
-        $this->assertTrue($this->containsTranslation($news->getTranslations(), 'bg'));
-        $this->assertTrue($this->containsTranslation($news->getTranslations(), 'fi'));
-    }
-
-    /**
-     * @param Translation[] $translations
-     * @param $locale
-     * @return boolean
-     */
-    private function containsTranslation($translations, $locale)
-    {
-        foreach ($translations as $translation) {
-            if ($translation->getLanguage()->getLocale() == $locale) {
-                return true;
-            }
-        }
-
-        return false;
+        $this->assertHasTranslation($news->getTranslations(), 'en');
+        $this->assertHasTranslation($news->getTranslations(), 'bg');
+        $this->assertHasTranslation($news->getTranslations(), 'fi');
     }
 
     public function testSuccessInsertOneTranslations()
@@ -308,7 +309,7 @@ class FormTest extends WebTestCase
         $this->assertTrue($form->isSubmitted());
         $this->assertTrue($form->isValid());
         $this->assertCount(1, $news->getTranslations());
-        $this->assertTrue($this->containsTranslation($news->getTranslations(), 'en'));
+        $this->assertHasTranslation($news->getTranslations(), 'en');
     }
 
     public function testDeleteTranslationsWithoutRequired()
@@ -594,8 +595,6 @@ class FormTest extends WebTestCase
         $this->buildDb($kernel);
         $this->insertLanguages($kernel);
 
-        $news = new News();
-
         $data = [
             'translations' => [
                 'en' => [
@@ -614,7 +613,7 @@ class FormTest extends WebTestCase
         $data = $form->getData();
         $translations = $data['translations'];
 
-        $this->assertTrue($this->containsTranslation($translations, 'en'));
-        $this->assertFalse($this->containsTranslation($translations, 'bg'));
+        $this->assertCount(1, $translations);
+        $this->assertHasTranslation($translations, 'en');
     }
 }
