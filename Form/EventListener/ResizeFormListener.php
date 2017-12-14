@@ -115,8 +115,10 @@ class ResizeFormListener implements EventSubscriberInterface
         $translations = $event->getData();
 
         $newData = [];
-        foreach ($translations as $translation) {
-            $newData[$translation->getLanguage()->getLocale()] = $translation;
+        if (is_array($translations)) {
+            foreach ($translations as $translation) {
+                $newData[$translation->getLanguage()->getLocale()] = $translation;
+            }
         }
 
         $event->setData($newData);
