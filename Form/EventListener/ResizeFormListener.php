@@ -111,11 +111,11 @@ class ResizeFormListener implements EventSubscriberInterface
             }
         }
 
-        /** @var Translation[] $translations */
+        /** @var Translation[]|null $translations */
         $translations = $event->getData();
 
         $newData = [];
-        if (is_array($translations)) {
+        if (is_array($translations) || $translations instanceof \Traversable) {
             foreach ($translations as $translation) {
                 $newData[$translation->getLanguage()->getLocale()] = $translation;
             }
