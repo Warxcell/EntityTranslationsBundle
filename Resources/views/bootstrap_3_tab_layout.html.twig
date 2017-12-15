@@ -1,9 +1,13 @@
 {% block translations_row %}
-    {{ form_label(form) }}
+    <div class="form-group">
+        {{ form_label(form) }}
 
-    {{ block('nav_tabs') }}
+        {{ block('nav_tabs') }}
 
-    {{ block('tab_contents') }}
+        {{ block('tab_contents') }}
+
+        {{ form_errors(form) }}
+    </div>
 {% endblock %}
 
 {% block nav_tabs %}
@@ -17,7 +21,7 @@
 {% block nav_tab %}
     <li {% if loop.first %}class="active"{% endif %}>
         <a data-toggle="tab" href="#{{ key }}"
-           class="{% if not child.vars.valid %}label label-danger{% endif %}">
+           class="{% if not child.vars.valid %}has-error{% endif %}">
             {{ form_label(child) }}
         </a>
     </li>
