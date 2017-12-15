@@ -140,7 +140,7 @@ class News implements Translatable
     /**
      * This is important, as form has default option: by_reference = false
      * so here we set the mapped side entity. 
-     * @param Translation|null $translation
+     * @param NewsTranslation|null $translation
      */
     public function addTranslation(NewsTranslation $translation) 
     {
@@ -148,6 +148,10 @@ class News implements Translatable
         $translation->setTranslatable($this);
     }
     
+    /**
+     * This is also used by form.
+     * @param NewsTranslation|null $translation
+     */
     public function removeTranslation(NewsTranslation $translation)
     {
         $this->getTranslations()->removeElement($translation);
@@ -161,10 +165,12 @@ class News implements Translatable
         $this->currentTranslation = $translation;
     }
     
-    public function getTitle() {
-        if ($this->currentTranslation) {
-            return $this->currentTranslation->getTitle();
-        }
+    /**
+     * @return string|null 
+     */
+    public function getTitle() 
+    {
+        return $this->currentTranslation ?: $this->currentTranslation->getTitle();
     }
 }
 ```
@@ -336,7 +342,7 @@ Load form theme (optionally)
 ```yaml
 twig:
     form_themes:
-        - '@VM5EntityTranslationsBundle::bootstrap_3_tab_layout.html.twig'
+        - 'VM5EntityTranslationsBundle::bootstrap_3_tab_layout.html.twig'
 ```
 
 
