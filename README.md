@@ -168,9 +168,9 @@ class News implements Translatable
     /**
      * @return string|null 
      */
-    public function getTitle() 
+    public function getTitle()
     {
-        return $this->currentTranslation ?: $this->currentTranslation->getTitle();
+        return !$this->currentTranslation ?: $this->currentTranslation->getTitle();
     }
 }
 ```
