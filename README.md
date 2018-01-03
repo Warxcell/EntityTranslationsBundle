@@ -222,7 +222,7 @@ class NewsTranslation implements Translation
     /**
      * @param News $translatable
      */
-    public function setTranslatable(News $translatable)
+    public function setTranslatable(News $translatable = null)
     {
         $this->translatable = $translatable;
     }
@@ -340,6 +340,30 @@ doctrine:
         # search for the "ResolveTargetEntityListener" class for an article about this
         resolve_target_entities: 
             VM5\EntityTranslationsBundle\Model\Language: Example\Language
+```
+
+Translatable should have `addTranslation`, `removeTranslation` (
+see <a href="https://symfony.com/doc/current/reference/forms/types/collection.html#by-reference" target="_blank">by-reference</a>
+and
+<a href="https://symfony.com/doc/current/doctrine/associations.html" target="_blank">How to Work with Doctrine Associations / Relations</a>
+):
+
+```php
+
+    public function addTranslation(NewsTranslation $translation)
+    {
+        if (!$this->translations->contains($translation)) {
+            $this->translations->add($translation);
+            $translation->setTranslatable($this);
+        }
+    }
+
+
+    public function removeTranslation(NewsTranslation $translation)
+    {
+        $this->translations->removeElement($translation);
+        $translation->setTranslatable(null);
+    }
 ```
 Translation should implements `EditableTranslation` instead of simple `Translation`
 
