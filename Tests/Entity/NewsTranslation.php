@@ -65,7 +65,7 @@ class NewsTranslation implements EditableTranslation
     /**
      * @param Translatable $translatable
      */
-    public function setTranslatable(Translatable $translatable)
+    public function setTranslatable(Translatable $translatable = null)
     {
         $this->translatable = $translatable;
     }

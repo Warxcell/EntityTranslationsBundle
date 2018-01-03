@@ -41,7 +41,7 @@ class News implements Translatable
     {
         $this->translations = new ArrayCollection($translations);
         foreach ($this->translations as $translation) {
-            $translation->setTranslatable($this);
+            $this->addTranslation($translation);
         }
     }
 
@@ -85,6 +85,7 @@ class News implements Translatable
     public function removeTranslation(NewsTranslation $translation)
     {
         $this->getTranslations()->removeElement($translation);
+        $translation->setTranslatable(null);
     }
 
     public function getTitle()
