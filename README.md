@@ -425,6 +425,6 @@ And then you can:
 in your main form.
 
 It's important to include `required` in `entry_language_options` for specific locales, because validation is triggered 
-only when language is not empty and it's required. 
+only when language is not empty or it's required. 
 
 Language is assumed as not empty when at least one of the fields are filled in.
