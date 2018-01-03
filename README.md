@@ -307,6 +307,17 @@ $translation = $this->get('vm5_entity_translations.translator')->getTranslation(
 
 Argument #2 can be either string locale or Language entity.
 
+You can also use translator to translate objects instead of using setCurrentTranslation.
+```php
+$translation = $this->get('vm5_entity_translations.translator')->translate($entity, 'field', 'bg');
+```
+Argument #3 is optional. If omitted current locale is assumed.
+
+
+You can also use class instead of key for accessing service:
+```php
+... $this->get(\VM5\EntityTranslationsBundle\Translator::class) ...
+```
 You can also use embedded Twig filters to translate in twig:
 
 ```twig
