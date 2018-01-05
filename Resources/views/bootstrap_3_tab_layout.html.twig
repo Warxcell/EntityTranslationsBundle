@@ -1,13 +1,15 @@
 {% block translations_row %}
     <div class="form-group">
         {{ form_label(form) }}
-
-        {{ block('nav_tabs') }}
-
-        {{ block('tab_contents') }}
-
+        {{ form_widget(form) }}
         {{ form_errors(form) }}
     </div>
+{% endblock %}
+
+{% block translations_widget %}
+    {{ block('nav_tabs') }}
+
+    {{ block('tab_contents') }}
 {% endblock %}
 
 {% block nav_tabs %}
@@ -18,15 +20,6 @@
     </ul>
 {% endblock %}
 
-{% block nav_tab %}
-    <li {% if loop.first %}class="active"{% endif %}>
-        <a data-toggle="tab" href="#{{ key }}"
-           class="{% if not child.vars.valid %}has-error{% endif %}">
-            {{ form_label(child) }}
-        </a>
-    </li>
-{% endblock %}
-
 {% block tab_contents %}
     <div class="tab-content">
         {% for key, child in form %}
@@ -35,6 +28,15 @@
     </div>
 
     {{ form_errors(form) }}
+{% endblock %}
+
+{% block nav_tab %}
+    <li {% if loop.first %}class="active"{% endif %}>
+        <a data-toggle="tab" href="#{{ key }}"
+           class="{% if not child.vars.valid %}has-error{% endif %}">
+            {{ form_label(child) }}
+        </a>
+    </li>
 {% endblock %}
 
 {% block tab_content %}
