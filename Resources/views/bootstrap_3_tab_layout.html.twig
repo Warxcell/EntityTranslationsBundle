@@ -32,7 +32,7 @@
 
 {% block nav_tab %}
     <li {% if loop.first %}class="active"{% endif %}>
-        <a data-toggle="tab" href="#{{ key }}"
+        <a data-toggle="tab" href="#{{ id ~ "_language_" ~ key }}"
            class="{% if not child.vars.valid %}has-error{% endif %}">
             {{ form_label(child) }}
         </a>
@@ -40,7 +40,7 @@
 {% endblock %}
 
 {% block tab_content %}
-    <div id="{{ key }}" class="tab-pane fade {% if loop.first %}in active{% endif %}">
+    <div id="{{ id ~ "_language_" ~ key }}" class="tab-pane fade {% if loop.first %}in active{% endif %}">
         {{ form_widget(child) }}
         {{ form_errors(child) }}
     </div>
