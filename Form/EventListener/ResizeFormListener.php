@@ -8,7 +8,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use VM5\EntityTranslationsBundle\Model\EditableTranslation;
 use VM5\EntityTranslationsBundle\Model\Language;
-use VM5\EntityTranslationsBundle\Model\Translatable;
 use VM5\EntityTranslationsBundle\Model\Translation;
 
 class ResizeFormListener implements EventSubscriberInterface
@@ -153,9 +152,6 @@ class ResizeFormListener implements EventSubscriberInterface
     {
         /** @var EditableTranslation[] $translations */
         $translations = $event->getData();
-
-        /** @var Translatable $translatable */
-        $translatable = $event->getForm()->getParent()->getData();
 
         $forDelete = [];
         foreach ($this->languages as $language) {

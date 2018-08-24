@@ -1,34 +1,35 @@
 {
-  "name": "vm5/entity-translations-bundle",
-  "description": "This bundle provides translations for entities in your project. It's a bundle, but can be used standalone.",
-  "type": "symfony-bundle",
-  "authors": [
-    {
-      "name": "Bozhidar Hristov",
-      "email": "b.hristov@vm5.eu"
+    "name": "vm5/entity-translations-bundle",
+    "license": "MIT",
+    "description": "This bundle provides translations for entities in your project. It's a bundle, but can be used standalone.",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Bozhidar Hristov",
+            "email": "b.hristov@vm5.eu"
+        }
+    ],
+    "keywords": [
+        "translation"
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "symfony/symfony": "~2.8 | ~3.0",
+        "doctrine/orm": "~2.5.0",
+        "doctrine/doctrine-bundle": "~1.8"
+    },
+    "suggest": {
+        "doctrine/orm": "Autoload translations with Doctrine ORM",
+        "symfony/symfony": "Needed for easy integration into Symfony",
+        "twig/twig": "Needed to use Twig Extension to translate in twig.",
+        "symfony/property-access": "Needed for Twig extension to translate",
+        "symfony/translation": "Needed if you want to use Symfony Translation's configuration. Otherwise this bundle should be setup separately.",
+        "symfony/form": "Needed if you want to use forms to translate entities.",
+        "doctrine/doctrine-bundle": "Needed if you want to use forms to translate entities."
+    },
+    "autoload": {
+        "psr-4": {
+            "VM5\\EntityTranslationsBundle\\": ""
+        }
     }
-  ],
-  "keywords": [
-    "translation"
-  ],
-  "require-dev": {
-    "phpunit/phpunit": "^5.7",
-    "symfony/symfony": "~2.8 | ~3.0",
-    "doctrine/orm": "~2.5.0",
-    "doctrine/doctrine-bundle": "~1.8"
-  },
-  "suggest": {
-    "doctrine/orm": "Autoload translations with Doctrine ORM",
-    "symfony/symfony": "Needed for easy integration into Symfony",
-    "twig/twig": "Needed to use Twig Extension to translate in twig.",
-    "symfony/property-access": "Needed for Twig extension to translate",
-    "symfony/translation": "Needed if you want to use Symfony Translation's configuration. Otherwise this bundle should be setup separately.",
-    "symfony/form": "Needed if you want to use forms to translate entities.",
-    "doctrine/doctrine-bundle": "Needed if you want to use forms to translate entities."
-  },
-  "autoload": {
-    "psr-4": {
-      "VM5\\EntityTranslationsBundle\\": ""
-    }
-  }
 }
