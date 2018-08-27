@@ -38,7 +38,7 @@
            aria-controls="{{ id ~ "_language_" ~ key }}"
            role="tab"
            href="#{{ id ~ "_language_" ~ key }}"
-           aria-selected=" {% if active %}true{% else %}false{% endif %}"
+           aria-selected="{% if active %}true{% else %}false{% endif %}"
            class="{% if not child.vars.valid %}has-error{% endif %} {% if active %}active{% endif %}"
         >
             {{ form_label(child) }}

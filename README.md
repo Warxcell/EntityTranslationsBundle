@@ -438,7 +438,7 @@ And then you can:
         'em' => 'manager_name', // optional
         'query_builder' => function(EntityRepository $repo) {
             return $repo->createQueryBuilder('languages');
-        } // optional
+        }, // optional
         'entry_language_options' => [
             'en' => [
                 'required' => true,
