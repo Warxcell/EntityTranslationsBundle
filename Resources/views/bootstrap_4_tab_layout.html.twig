@@ -39,7 +39,7 @@
            role="tab"
            href="#{{ id ~ "_language_" ~ key }}"
            aria-selected="{% if active %}true{% else %}false{% endif %}"
-           class="nav-link {% if not child.vars.valid %}has-error{% endif %} {% if active %}active{% endif %}"
+           class="nav-link {% if not child.vars.valid %}alert alert-danger{% endif %} {% if active %}active{% endif %}"
         >
             {{ form_label(child) }}
         </a>
