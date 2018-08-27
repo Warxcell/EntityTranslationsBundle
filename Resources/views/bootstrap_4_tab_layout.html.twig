@@ -1,0 +1,59 @@
+{% block translations_row %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </div>
+{% endblock %}
+
+{% block translations_widget %}
+    {{ block('nav_tabs') }}
+
+    {{ block('tab_contents') }}
+{% endblock %}
+
+{% block nav_tabs %}
+    <ul class="nav nav-tabs" role="tablist">
+        {% for key, child in form %}
+            {{ block('nav_tab') }}
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block tab_contents %}
+    <div class="tab-content">
+        {% for key, child in form %}
+            {{ block('tab_content') }}
+        {% endfor %}
+    </div>
+
+    {{ form_errors(form) }}
+{% endblock %}
+
+{% block nav_tab %}
+    {% set active = loop.first %}
+    <li class="nav-item">
+        <a id="{{ id ~ "_language_" ~ key ~ '_tab' }}"
+           data-toggle="tab"
+           aria-controls="{{ id ~ "_language_" ~ key }}"
+           role="tab"
+           href="#{{ id ~ "_language_" ~ key }}"
+           aria-selected=" {% if active %}true{% else %}false{% endif %}"
+           class="{% if not child.vars.valid %}has-error{% endif %} {% if active %}active{% endif %}"
+        >
+            {{ form_label(child) }}
+        </a>
+    </li>
+{% endblock %}
+
+{% block tab_content %}
+    {% set active = loop.first %}
+    <div id="{{ id ~ "_language_" ~ key }}"
+         role="tabpanel"
+         aria-labelledby="{{ id ~ "_language_" ~ key ~ '_tab' }}"
+         class="tab-pane fade {% if active %}show active{% endif %}"
+    >
+        {{ form_widget(child) }}
+        {{ form_errors(child) }}
+    </div>
+{% endblock %}
