@@ -380,6 +380,8 @@ twig:
         - 'VM5EntityTranslationsBundle::bootstrap_3_tab_layout.html.twig'
 ```
 
+Use `'VM5EntityTranslationsBundle::bootstrap_4_tab_layout.html.twig'` for Bootstrap 4 support.
+
 
 You need to create translation's form.
 ```php
