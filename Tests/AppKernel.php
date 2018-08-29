@@ -1,5 +1,7 @@
 <?php
 
+namespace VM5\EntityTranslationsBundle\Tests;
+
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
