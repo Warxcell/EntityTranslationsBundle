@@ -34,5 +34,6 @@ doctrine:
 services:
     news_controller:
         class: VM5\EntityTranslationsBundle\Tests\Functional\Controller\NewsController
+        public: true
         arguments:
           - '@doctrine'
