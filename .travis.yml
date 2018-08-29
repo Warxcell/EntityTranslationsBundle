@@ -12,4 +12,4 @@ env:
   - SYMFONY_VERSION="4.1.*"
 
 install:
-   - php -dmemory_limit=-1 composer require symfony/symfony:${SYMFONY_VERSION}
+   - composer require symfony/symfony:${SYMFONY_VERSION}
