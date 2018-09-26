@@ -22,3 +22,6 @@ matrix:
 
 install:
 - composer require symfony/symfony:${SYMFONY_VERSION}
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
