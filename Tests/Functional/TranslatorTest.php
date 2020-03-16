@@ -35,7 +35,7 @@ class TranslatorTest extends WebTestCase
 
         $kernel = $client->getKernel();
 
-        $container = $kernel->getContainer();
+        $container = self::$container;
 
         /** @var Translator $translator */
         $translator = $container->get(Translator::class);
@@ -54,7 +54,7 @@ class TranslatorTest extends WebTestCase
 
         $kernel = $client->getKernel();
 
-        $container = $kernel->getContainer();
+        $container = self::$container;
 
         /** @var Translator $translator */
         $translator = $container->get(Translator::class);
@@ -73,7 +73,7 @@ class TranslatorTest extends WebTestCase
         $kernel = $client->getKernel();
         $this->buildDb($kernel);
 
-        $container = $kernel->getContainer();
+        $container = self::$container;
 
         $em = $container->get('doctrine')->getManager();
 
@@ -117,7 +117,7 @@ class TranslatorTest extends WebTestCase
         $kernel = $client->getKernel();
         $this->buildDb($kernel);
 
-        $container = $kernel->getContainer();
+        $container = self::$container;
 
         $em = $container->get('doctrine')->getManager();
 
