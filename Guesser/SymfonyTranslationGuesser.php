@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Arxy\EntityTranslationsBundle\Guesser;
 
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SymfonyTranslationGuesser implements Guesser
 {
