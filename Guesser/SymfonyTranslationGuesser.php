@@ -26,7 +26,7 @@ class SymfonyTranslationGuesser implements Guesser
         return $this->symfonyTranslator->getLocale();
     }
 
-    public function guessFallbackLocales(): ?string
+    public function guessFallbackLocales(): ?array
     {
         if (method_exists($this->symfonyTranslator, 'getFallbackLocales')) {
             return $this->symfonyTranslator->getFallbackLocales();

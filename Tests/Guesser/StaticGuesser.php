@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Arxy\EntityTranslationsBundle\Tests\Guesser;
 
@@ -27,12 +28,12 @@ class StaticGuesser implements Guesser
         $this->fallbackLocales = $fallbackLocales;
     }
 
-    public function guessLocale()
+    public function guessLocale(): ?string
     {
         return $this->locale;
     }
 
-    public function guessFallbackLocales()
+    public function guessFallbackLocales(): ?array
     {
         return $this->fallbackLocales;
     }

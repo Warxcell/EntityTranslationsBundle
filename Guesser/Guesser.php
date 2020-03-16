@@ -8,5 +8,5 @@ interface Guesser
 {
     public function guessLocale(): ?string;
 
-    public function guessFallbackLocales(): ?string;
+    public function guessFallbackLocales(): ?array;
 }

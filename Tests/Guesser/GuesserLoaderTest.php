@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Arxy\EntityTranslationsBundle\Tests\Guesser;
 
-use PHPUnit\Framework\TestCase;
 use Arxy\EntityTranslationsBundle\Guesser\GuesserLoader;
 use Arxy\EntityTranslationsBundle\Translator;
+use PHPUnit\Framework\TestCase;
 
 class GuesserLoaderTest extends TestCase
 {
