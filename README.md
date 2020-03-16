@@ -1,6 +1,6 @@
 # EntityTranslationsBundle
 
-[![Build Status](https://travis-ci.org/arxy/EntityTranslationsBundle.png)](https://travis-ci.org5/arxy/EntityTranslationsBundle)
+[![Build Status](https://travis-ci.org/arxy/EntityTranslationsBundle.png)](https://travis-ci.org/arxy/EntityTranslationsBundle)
 
 [![codecov](https://codecov.io/gh/arxy/EntityTranslationsBundle/branch/master/graph/badge.svg)](https://codecov.io/gh/arxy/EntityTranslationsBundle)
 
