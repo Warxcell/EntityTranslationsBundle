@@ -80,7 +80,7 @@ class Language implements \Arxy\EntityTranslationsBundle\Model\Language
     /**
      * @return mixed
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }
@@ -162,7 +162,7 @@ class News implements Translatable
     /**
     * This method is used by bundle to inject current translation.
     */
-    public function setCurrentTranslation(Translation $translation = null) 
+    public function setCurrentTranslation(Translation $translation = null): void
     {
         $this->currentTranslation = $translation;
     }
@@ -183,7 +183,7 @@ NewsTranslations.php
 
 namespace Example;
 
-use Doctrine\ORM\Mapping as ORM;
+use Arxy\EntityTranslationsBundle\Model\Language;use Doctrine\ORM\Mapping as ORM;
 use Arxy\EntityTranslationsBundle\Model\Translation;
 
 /**
@@ -232,7 +232,7 @@ class NewsTranslation implements Translation
     /**
      * @return Language
      */
-    public function getLanguage()
+    public function getLanguage(): Language
     {
         return $this->language;
     }
