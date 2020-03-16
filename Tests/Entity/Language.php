@@ -1,15 +1,13 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests\Entity;
+namespace Arxy\EntityTranslationsBundle\Tests\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Language
- * @package VM5\EntityTranslationsBundle\Tests
  * @ORM\Entity()
  */
-class Language implements \VM5\EntityTranslationsBundle\Model\Language
+class Language implements \Arxy\EntityTranslationsBundle\Model\Language
 {
     /**
      * @var string

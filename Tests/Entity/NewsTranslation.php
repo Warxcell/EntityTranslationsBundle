@@ -1,15 +1,13 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests\Entity;
+namespace Arxy\EntityTranslationsBundle\Tests\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use VM5\EntityTranslationsBundle\Model\EditableTranslation;
-use VM5\EntityTranslationsBundle\Model\Language as LanguageInterface;
-use VM5\EntityTranslationsBundle\Model\Translatable;
+use Arxy\EntityTranslationsBundle\Model\EditableTranslation;
+use Arxy\EntityTranslationsBundle\Model\Language as LanguageInterface;
+use Arxy\EntityTranslationsBundle\Model\Translatable;
 
 /**
- * Class NewsTranslation
- * @package VM5\EntityTranslationsBundle\Tests
  * @ORM\Entity()
  */
 class NewsTranslation implements EditableTranslation

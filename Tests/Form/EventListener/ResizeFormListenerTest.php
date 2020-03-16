@@ -1,14 +1,14 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests\Form\EventListener;
+namespace Arxy\EntityTranslationsBundle\Tests\Form\EventListener;
 
+use Arxy\EntityTranslationsBundle\Form\EventListener\ResizeFormListener;
+use Arxy\EntityTranslationsBundle\Tests\Entity\Language;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
-use VM5\EntityTranslationsBundle\Form\EventListener\ResizeFormListener;
-use VM5\EntityTranslationsBundle\Tests\Entity\Language;
 
 class ResizeFormListenerTest extends TestCase
 {

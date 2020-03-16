@@ -1,20 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexander
- * Date: 11.12.2017 г.
- * Time: 14:51
- */
 
-namespace VM5\EntityTranslationsBundle\Tests\Form\Type;
-
+namespace Arxy\EntityTranslationsBundle\Tests\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use VM5\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
+use Arxy\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
 
 class NewsTranslationType extends AbstractType
 {
@@ -23,18 +16,20 @@ class NewsTranslationType extends AbstractType
         $builder->add(
             'title',
             TextType::class,
-            array_merge($options['title_options'],
+            array_merge(
+                $options['title_options'],
                 [
-                    'required' => false
+                    'required' => false,
                 ]
             )
         );
         $builder->add(
             'description',
             TextareaType::class,
-            array_merge($options['description_options'],
+            array_merge(
+                $options['description_options'],
                 [
-                    'required' => false
+                    'required' => false,
                 ]
             )
         );

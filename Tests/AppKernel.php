@@ -10,7 +10,7 @@ class AppKernel extends Kernel
         $bundles = array();
         $bundles[] = new \Symfony\Bundle\FrameworkBundle\FrameworkBundle();
         $bundles[] = new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle();
-        $bundles[] = new \VM5\EntityTranslationsBundle\VM5EntityTranslationsBundle();
+        $bundles[] = new \Arxy\EntityTranslationsBundle\ArxyEntityTranslationsBundle();
 
         return $bundles;
     }

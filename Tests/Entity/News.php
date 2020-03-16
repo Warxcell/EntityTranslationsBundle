@@ -1,15 +1,13 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests\Entity;
+namespace Arxy\EntityTranslationsBundle\Tests\Entity;
 
+use Arxy\EntityTranslationsBundle\Model\Translatable;
+use Arxy\EntityTranslationsBundle\Model\Translation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use VM5\EntityTranslationsBundle\Model\Translatable;
-use VM5\EntityTranslationsBundle\Model\Translation;
 
 /**
- * Class News
- * @package VM5\EntityTranslationsBundle\Tests
  * @ORM\Entity()
  */
 class News implements Translatable

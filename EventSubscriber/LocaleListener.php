@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\EventSubscriber;
+namespace VMArxy5\EntityTranslationsBundle\EventSubscriber;
 
+use Arxy\EntityTranslationsBundle\Guesser\GuesserLoader;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use VM5\EntityTranslationsBundle\Guesser\GuesserLoader;
 
 class LocaleListener implements EventSubscriberInterface
 {
@@ -14,18 +15,11 @@ class LocaleListener implements EventSubscriberInterface
      */
     private $guessLoader;
 
-    /**
-     * LocaleListener constructor.
-     * @param GuesserLoader $guessLoader
-     */
     public function __construct(GuesserLoader $guessLoader)
     {
         $this->guessLoader = $guessLoader;
     }
 
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents()
     {
         return [
@@ -33,9 +27,6 @@ class LocaleListener implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GetResponseEvent $event
-     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         $this->guessLoader->load();

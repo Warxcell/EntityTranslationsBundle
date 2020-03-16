@@ -1,15 +1,15 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests\Functional;
+namespace Arxy\EntityTranslationsBundle\Tests\Functional;
 
+use Arxy\EntityTranslationsBundle\Tests\Entity\Language;
+use Arxy\EntityTranslationsBundle\Tests\Entity\News;
+use Arxy\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
+use Arxy\EntityTranslationsBundle\Translator;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use VM5\EntityTranslationsBundle\Tests\Entity\Language;
-use VM5\EntityTranslationsBundle\Tests\Entity\News;
-use VM5\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
-use VM5\EntityTranslationsBundle\Translator;
 
 class TranslatorTest extends WebTestCase
 {

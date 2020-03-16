@@ -1,13 +1,13 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests;
+namespace Arxy\EntityTranslationsBundle\Tests;
 
+use Arxy\EntityTranslationsBundle\Tests\Entity\Language;
+use Arxy\EntityTranslationsBundle\Tests\Entity\News;
+use Arxy\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
+use Arxy\EntityTranslationsBundle\Translator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use VM5\EntityTranslationsBundle\Tests\Entity\Language;
-use VM5\EntityTranslationsBundle\Tests\Entity\News;
-use VM5\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
-use VM5\EntityTranslationsBundle\Translator;
 
 class TranslatorTest extends TestCase
 {

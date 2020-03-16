@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\DependencyInjection;
+namespace Arxy\EntityTranslationsBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class VM5EntityTranslationsExtension extends Extension
+class ArxyEntityTranslationsExtension extends Extension
 {
     /**
      * {@inheritdoc}

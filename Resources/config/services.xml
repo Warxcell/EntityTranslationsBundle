@@ -6,57 +6,51 @@
 
 
     <services>
-        <service id="vm5_entity_translations.translator"
-                 alias="VM5\EntityTranslationsBundle\Translator"
+        <service id="arxy.entity_translations.translator"
+                 alias="Arxy\EntityTranslationsBundle\Translator"
                  public="true">
         </service>
 
-        <service id="VM5\EntityTranslationsBundle\Translator"
-                 class="VM5\EntityTranslationsBundle\Translator"
-                 public="true">
+        <service id="Arxy\EntityTranslationsBundle\Translator">
             <argument>en</argument>
             <call method="setPropertyAccessor">
                 <argument type="service" id="property_accessor" on-invalid="ignore"/>
             </call>
         </service>
 
-        <service id="vm5_entity_translations.doctrine.translation_loader"
-                 class="VM5\EntityTranslationsBundle\EventSubscriber\CurrentTranslationLoader"
+        <service id="arxy.entity_translations.doctrine.translation_loader"
+                 class="Arxy\EntityTranslationsBundle\EventSubscriber\CurrentTranslationLoader"
                  public="false">
-            <argument type="service" id="vm5_entity_translations.translator"/>
+            <argument type="service" id="arxy.entity_translations.translator"/>
             <tag name="doctrine.event_subscriber"/>
         </service>
 
-        <service id="VM5\EntityTranslationsBundle\Guesser\GuesserLoader"
-                 class="VM5\EntityTranslationsBundle\Guesser\GuesserLoader">
-            <argument type="service" id="vm5_entity_translations.translator"/>
+        <service id="Arxy\EntityTranslationsBundle\Guesser\GuesserLoader">
+            <argument type="service" id="arxy.entity_translations.translator"/>
             <argument type="collection">
-                <argument type="service" id="VM5\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser"/>
+                <argument type="service" id="Arxy\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser"/>
             </argument>
         </service>
 
-        <service id="vm5_entity_translations.locale_loader"
-                 class="VM5\EntityTranslationsBundle\EventSubscriber\LocaleListener"
+        <service id="arxy.entity_translations.locale_loader"
+                 class="Arxy\EntityTranslationsBundle\EventSubscriber\LocaleListener"
                  public="true">
             <tag name="kernel.event_subscriber"/>
-            <argument type="service" id="VM5\EntityTranslationsBundle\Guesser\GuesserLoader"/>
+            <argument type="service" id="Arxy\EntityTranslationsBundle\Guesser\GuesserLoader"/>
         </service>
 
-        <service id="VM5\EntityTranslationsBundle\Twig\Extension\TranslationExtension"
-                 class="VM5\EntityTranslationsBundle\Twig\Extension\TranslationExtension"
+        <service id="Arxy\EntityTranslationsBundle\Twig\Extension\TranslationExtension"
                  public="false">
-            <argument type="service" id="vm5_entity_translations.translator"/>
+            <argument type="service" id="arxy.entity_translations.translator"/>
             <tag name="twig.extension"/>
         </service>
 
-        <service id="VM5\EntityTranslationsBundle\Form\Type\TranslationsType"
-                 class="VM5\EntityTranslationsBundle\Form\Type\TranslationsType">
+        <service id="Arxy\EntityTranslationsBundle\Form\Type\TranslationsType">
             <argument type="service" id="doctrine"/>
             <tag name="form.type"/>
         </service>
 
-        <service id="VM5\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser"
-                 class="VM5\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser">
+        <service id="Arxy\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser">
             <argument type="service" id="translator"/>
         </service>
     </services>

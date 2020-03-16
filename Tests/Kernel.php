@@ -1,6 +1,6 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests;
+namespace Arxy\EntityTranslationsBundle\Tests;
 
 require 'AppKernel.php';
 

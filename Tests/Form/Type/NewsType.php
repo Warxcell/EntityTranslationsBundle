@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexander
- * Date: 11.12.2017 г.
- * Time: 14:49
- */
 
-namespace VM5\EntityTranslationsBundle\Tests\Form\Type;
+namespace Arxy\EntityTranslationsBundle\Tests\Form\Type;
 
+use Arxy\EntityTranslationsBundle\Form\Type\TranslationsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use VM5\EntityTranslationsBundle\Form\Type\TranslationsType;
 
 class NewsType extends AbstractType
 {
@@ -20,7 +14,8 @@ class NewsType extends AbstractType
         $builder->add(
             'translations',
             TranslationsType::class,
-            array_merge($options['translation_options'],
+            array_merge(
+                $options['translation_options'],
                 [
                     'entry_type' => NewsTranslationType::class,
                 ]

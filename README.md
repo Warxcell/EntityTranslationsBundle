@@ -1,22 +1,22 @@
 # EntityTranslationsBundle
 
-[![Build Status](https://travis-ci.org/vm5/EntityTranslationsBundle.png)](https://travis-ci.org/vm5/EntityTranslationsBundle)
+[![Build Status](https://travis-ci.org/arxy/EntityTranslationsBundle.png)](https://travis-ci.org5/arxy/EntityTranslationsBundle)
 
-[![codecov](https://codecov.io/gh/vm5/EntityTranslationsBundle/branch/master/graph/badge.svg)](https://codecov.io/gh/vm5/EntityTranslationsBundle)
+[![codecov](https://codecov.io/gh/arxy/EntityTranslationsBundle/branch/master/graph/badge.svg)](https://codecov.io/gh/arxy/EntityTranslationsBundle)
 
 Very simple bundle that allows you to translate your entities.
 
 ## Installation: 
 ###### it is recommented to install X.Y.* version - This project follow <a target="_blank" href="https://semver.org/">semver</a> - Patch versions will be always compatible with each other. Minor versions may contain minor BC-breaks.
-- composer require vm5/entity-translations-bundle
-- Register bundle in AppKernel.php: `new VM5\EntityTranslationsBundle\VM5EntityTranslationsBundle()`
-- Translatable must `implements \VM5\EntityTranslationsBundle\Model\Translatable`
-- Translations must `implements \VM5\EntityTranslationsBundle\Model\Translation`
-- You must have 1 entity containing all the languages, it must `implements \VM5\EntityTranslationsBundle\Language`
+- composer require arxy/entity-translations-bundle
+- Register bundle in AppKernel.php: `new Arxy\EntityTranslationsBundle\ArxyEntityTranslationsBundle()`
+- Translatable must `implements \Arxy\EntityTranslationsBundle\Model\Translatable`
+- Translations must `implements \Arxy\EntityTranslationsBundle\Model\Translation`
+- You must have 1 entity containing all the languages, it must `implements \Arxy\EntityTranslationsBundle\Language`
 - Include services.xml in config.yml: 
 ```
 imports:
-    - { resource: "@VM5EntityTranslationsBundle/Resources/config/services.xml" }
+    - { resource: "@ArxyEntityTranslationsBundle/Resources/config/services.xml" }
 ```
 
 No configuration is needed. Current and fallback locales are taken from Symfony:
@@ -44,7 +44,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="languages")
  */
-class Language implements \VM5\EntityTranslationsBundle\Model\Language
+class Language implements \Arxy\EntityTranslationsBundle\Model\Language
 {
     /**
      * @ORM\Id
@@ -106,8 +106,8 @@ News.php
 namespace Example;
 
 use Doctrine\ORM\Mapping as ORM;
-use VM5\EntityTranslationsBundle\Model\Translatable;
-use VM5\EntityTranslationsBundle\Model\Translation;
+use Arxy\EntityTranslationsBundle\Model\Translatable;
+use Arxy\EntityTranslationsBundle\Model\Translation;
 
 /**
  * @ORM\Entity()
@@ -184,7 +184,7 @@ NewsTranslations.php
 namespace Example;
 
 use Doctrine\ORM\Mapping as ORM;
-use VM5\EntityTranslationsBundle\Model\Translation;
+use Arxy\EntityTranslationsBundle\Model\Translation;
 
 /**
  * @ORM\Entity
@@ -282,19 +282,19 @@ $em->flush();
 If you wish to change language of all managed entities:
 
 ```php
-$this->get('vm5_entity_translations.translator')->setLocale('bg');
+$this->get('arxy.entity_translations.translator')->setLocale('bg');
 ```
 
 You can change language of single entity:
 ```php
-$initializedLocale = $this->get('vm5_entity_translations.translator')->initializeTranslation($entity, 'bg');
+$initializedLocale = $this->get('arxy.entity_translations.translator')->initializeTranslation($entity, 'bg');
 ```
 `$initializedLocale` is actual locale initialized in entity - it's not necessary to be `bg`, it could be one of fallback locales. 
 Argument #2 can be either string locale or Language entity.
 
 You can detach entity from manager
 ```php
-$this->get('vm5_entity_translations.translator')->detach($entity);
+$this->get('arxy.entity_translations.translator')->detach($entity);
 ```
 
 So it won't be affected by locale changing.
@@ -303,22 +303,22 @@ So it won't be affected by locale changing.
 If you wish to get single translation without initialize it, you can use:
 
 ```php
-/** @var $translation \VM5\EntityTranslationBundle\Model\Translation */
-$translation = $this->get('vm5_entity_translations.translator')->getTranslation($entity, 'bg');
+/** @var $translation \Arxy\EntityTranslationBundle\Model\Translation */
+$translation = $this->get('arxy_entity_translations.translator')->getTranslation($entity, 'bg');
 ```
 
 Argument #2 can be either string locale or Language entity.
 
 You can also use translator to translate objects instead of using setCurrentTranslation.
 ```php
-$translation = $this->get('vm5_entity_translations.translator')->translate($entity, 'field', 'bg');
+$translation = $this->get('arxy_entity_translations.translator')->translate($entity, 'field', 'bg');
 ```
 Argument #3 is optional. If omitted current locale is assumed.
 
 
 You can also use class instead of key for accessing service:
 ```php
-... $this->get(\VM5\EntityTranslationsBundle\Translator::class) ...
+... $this->get(\Arxy\EntityTranslationsBundle\Translator::class) ...
 ```
 You can also use embedded Twig filters to translate in twig:
 
@@ -341,7 +341,7 @@ doctrine:
    orm:
         # search for the "ResolveTargetEntityListener" class for an article about this
         resolve_target_entities: 
-            VM5\EntityTranslationsBundle\Model\Language: Example\Language
+            Arxy\EntityTranslationsBundle\Model\Language: Example\Language
 ```
 
 Translatable should have `addTranslation`, `removeTranslation` (
@@ -370,7 +370,7 @@ and
 Translation should implements `EditableTranslation` instead of simple `Translation`
 
 ```php
-use VM5\EntityTranslationsBundle\Model\EditableTranslation;
+use Arxy\EntityTranslationsBundle\Model\EditableTranslation;
 
 class NewsTranslation implements EditableTranslation
 ```
@@ -379,10 +379,10 @@ Load form theme (optionally)
 ```yaml
 twig:
     form_themes:
-        - 'VM5EntityTranslationsBundle::bootstrap_3_tab_layout.html.twig'
+        - 'ArxyEntityTranslationsBundle::bootstrap_3_tab_layout.html.twig'
 ```
 
-Use `'VM5EntityTranslationsBundle::bootstrap_4_tab_layout.html.twig'` for Bootstrap 4 support.
+Use `'ArxyEntityTranslationsBundle::bootstrap_4_tab_layout.html.twig'` for Bootstrap 4 support.
 
 
 You need to create translation's form.
@@ -434,7 +434,7 @@ And then you can:
 ```php
 ->add(
     'translations',
-    \VM5\EntityTranslationsBundle\Form\Type\TranslationsType::class,
+    \Arxy\EntityTranslationsBundle\Form\Type\TranslationsType::class,
     [
         'entry_type' => NewsTranslationType::class,
         'em' => 'manager_name', // optional

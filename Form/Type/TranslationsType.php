@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\Form\Type;
+namespace Arxy\EntityTranslationsBundle\Form\Type;
 
+use Arxy\EntityTranslationsBundle\Form\EventListener\ResizeFormListener;
+use Arxy\EntityTranslationsBundle\Model\Language;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use VM5\EntityTranslationsBundle\Form\EventListener\ResizeFormListener;
-use VM5\EntityTranslationsBundle\Model\Language;
 
 class TranslationsType extends AbstractType
 {
@@ -19,10 +20,6 @@ class TranslationsType extends AbstractType
      */
     private $managerRegistry;
 
-    /**
-     * TranslationsType constructor.
-     * @param ManagerRegistry $managerRegistry
-     */
     public function __construct(
         ManagerRegistry $managerRegistry
     ) {

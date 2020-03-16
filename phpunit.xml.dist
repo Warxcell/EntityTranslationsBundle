@@ -13,7 +13,7 @@
 >
     <php>
         <server name="KERNEL_DIR" value="./Tests/"/>
-        <server name="KERNEL_CLASS" value="VM5\EntityTranslationsBundle\Tests\Kernel"/>
+        <server name="KERNEL_CLASS" value="Arxy\EntityTranslationsBundle\Tests\Kernel"/>
     </php>
 
     <testsuites>

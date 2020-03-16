@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\Guesser;
+namespace Arxy\EntityTranslationsBundle\Guesser;
 
-use VM5\EntityTranslationsBundle\Translator;
+use Arxy\EntityTranslationsBundle\Translator;
 
 class GuesserLoader
 {
@@ -16,11 +17,6 @@ class GuesserLoader
      */
     private $guessers = [];
 
-    /**
-     * GuesserLoader constructor.
-     * @param Translator $entityTranslator
-     * @param Guesser[] $guessers
-     */
     public function __construct(Translator $entityTranslator, array $guessers)
     {
         $this->entityTranslator = $entityTranslator;

@@ -1,7 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\Guesser;
-
+namespace Arxy\EntityTranslationsBundle\Guesser;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -21,12 +21,12 @@ class SymfonyTranslationGuesser implements Guesser
         $this->symfonyTranslator = $symfonyTranslator;
     }
 
-    public function guessLocale()
+    public function guessLocale(): ?string
     {
         return $this->symfonyTranslator->getLocale();
     }
 
-    public function guessFallbackLocales()
+    public function guessFallbackLocales(): ?string
     {
         if (method_exists($this->symfonyTranslator, 'getFallbackLocales')) {
             return $this->symfonyTranslator->getFallbackLocales();

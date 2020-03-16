@@ -1,9 +1,10 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Twig\Extension;
+namespace Arxy\EntityTranslationsBundle\Twig\Extension;
 
-use VM5\EntityTranslationsBundle\Model\Translatable;
-use VM5\EntityTranslationsBundle\Translator;
+use Arxy\EntityTranslationsBundle\Model\Translatable;
+use Arxy\EntityTranslationsBundle\Model\Translation;
+use Arxy\EntityTranslationsBundle\Translator;
 
 class TranslationExtension extends \Twig_Extension
 {
@@ -12,18 +13,11 @@ class TranslationExtension extends \Twig_Extension
      */
     private $translator;
 
-    /**
-     * LanguageExtension constructor.
-     * @param Translator $translationService
-     */
     public function __construct(Translator $translationService)
     {
         $this->translator = $translationService;
     }
 
-    /**
-     * @return \Twig_SimpleFilter[]
-     */
     public function getFilters()
     {
         return [
@@ -32,23 +26,12 @@ class TranslationExtension extends \Twig_Extension
         ];
     }
 
-    /**
-     * @param Translatable $translatable
-     * @param string $locale
-     * @return null|\VM5\EntityTranslationsBundle\Model\Translation
-     */
-    public function getTranslation(Translatable $translatable, $locale)
+    public function getTranslation(Translatable $translatable, string $locale): ?Translation
     {
         return $this->translator->getTranslation($translatable, $locale);
     }
 
-    /**
-     * @param Translatable $translatable
-     * @param string $locale
-     * @param string $field
-     * @return null|string
-     */
-    public function translate(Translatable $translatable, $field, $locale = null)
+    public function translate(Translatable $translatable, string $field, string $locale = null): ?string
     {
         return $this->translator->translate($translatable, $field, $locale);
     }

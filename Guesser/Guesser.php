@@ -1,17 +1,12 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\Guesser;
+namespace Arxy\EntityTranslationsBundle\Guesser;
 
 
 interface Guesser
 {
-    /**
-     * @return string|null
-     */
-    public function guessLocale();
+    public function guessLocale(): ?string;
 
-    /**
-     * @return string[]|null
-     */
-    public function guessFallbackLocales();
+    public function guessFallbackLocales(): ?string;
 }

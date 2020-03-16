@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bozhidar.hristov
- * Date: 6.12.17
- * Time: 15:33
- */
 
-namespace VM5\EntityTranslationsBundle\Tests\Guesser;
+namespace Arxy\EntityTranslationsBundle\Tests\Guesser;
 
-
-use VM5\EntityTranslationsBundle\Guesser\Guesser;
+use Arxy\EntityTranslationsBundle\Guesser\Guesser;
 
 class StaticGuesser implements Guesser
 {

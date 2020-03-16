@@ -1,11 +1,11 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests\Functional\Controller;
+namespace Arxy\EntityTranslationsBundle\Tests\Functional\Controller;
 
+use Arxy\EntityTranslationsBundle\Tests\Entity\News;
 use Doctrine\Common\Persistence\AbstractManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use VM5\EntityTranslationsBundle\Tests\Entity\News;
 
 class NewsController
 {

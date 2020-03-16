@@ -1,11 +1,11 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests\Guesser;
+namespace Arxy\EntityTranslationsBundle\Tests\Guesser;
 
+use Arxy\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\Translator;
-use VM5\EntityTranslationsBundle\Guesser\SymfonyTranslationGuesser;
 
 class TranslatorTest extends TestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests\Guesser;
+namespace Arxy\EntityTranslationsBundle\Tests\Guesser;
 
 use PHPUnit\Framework\TestCase;
-use VM5\EntityTranslationsBundle\Guesser\GuesserLoader;
-use VM5\EntityTranslationsBundle\Translator;
+use Arxy\EntityTranslationsBundle\Guesser\GuesserLoader;
+use Arxy\EntityTranslationsBundle\Translator;
 
 class GuesserLoaderTest extends TestCase
 {

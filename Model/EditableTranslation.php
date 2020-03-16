@@ -1,13 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\Model;
-
+namespace Arxy\EntityTranslationsBundle\Model;
 
 interface EditableTranslation extends Translation
 {
-    /**
-     * @param Language $language
-     * @return void
-     */
-    public function setLanguage(Language $language);
+    public function setLanguage(Language $language): void;
 }

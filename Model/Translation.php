@@ -1,11 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\Model;
+namespace Arxy\EntityTranslationsBundle\Model;
 
 interface Translation
 {
-    /**
-     * @return Language
-     */
-    public function getLanguage();
+    public function getLanguage(): Language;
 }

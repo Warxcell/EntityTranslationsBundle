@@ -1,5 +1,5 @@
 imports:
-    - { resource: "@VM5EntityTranslationsBundle/Resources/config/services.xml" }
+    - { resource: "@ArxyEntityTranslationsBundle/Resources/config/services.xml" }
 
 framework:
     test: ~
@@ -22,18 +22,18 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-            VM5EntityTranslationsTests:
+            ArxyEntityTranslationsTests:
                 type: annotation
                 dir: '%kernel.root_dir%/Entity'
                 is_bundle: false
-                prefix: VM5\EntityTranslationsBundle\Tests\Entity
+                prefix: Arxy\EntityTranslationsBundle\Tests\Entity
         resolve_target_entities:
-                    VM5\EntityTranslationsBundle\Model\Language: VM5\EntityTranslationsBundle\Tests\Entity\Language
+            Arxy\EntityTranslationsBundle\Model\Language: Arxy\EntityTranslationsBundle\Tests\Entity\Language
 
 
 services:
     news_controller:
-        class: VM5\EntityTranslationsBundle\Tests\Functional\Controller\NewsController
+        class: Arxy\EntityTranslationsBundle\Tests\Functional\Controller\NewsController
         public: true
         arguments:
-          - '@doctrine'
+            - '@doctrine'

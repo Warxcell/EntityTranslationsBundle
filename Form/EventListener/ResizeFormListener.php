@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\Form\EventListener;
+namespace Arxy\EntityTranslationsBundle\Form\EventListener;
 
+use Arxy\EntityTranslationsBundle\Model\EditableTranslation;
+use Arxy\EntityTranslationsBundle\Model\Language;
+use Arxy\EntityTranslationsBundle\Model\Translation;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
-use VM5\EntityTranslationsBundle\Model\EditableTranslation;
-use VM5\EntityTranslationsBundle\Model\Language;
-use VM5\EntityTranslationsBundle\Model\Translation;
 
 class ResizeFormListener implements EventSubscriberInterface
 {
@@ -37,15 +38,8 @@ class ResizeFormListener implements EventSubscriberInterface
      */
     private $forDelete = [];
 
-    /**
-     * ResizeFormListener constructor.
-     * @param string $type
-     * @param array $options
-     * @param array $languageOptions
-     * @param Language[] $languages
-     */
     public function __construct(
-        $type,
+        string $type,
         array $options,
         array $languageOptions,
         array $languages

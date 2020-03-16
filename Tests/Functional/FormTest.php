@@ -1,7 +1,12 @@
 <?php
 
-namespace VM5\EntityTranslationsBundle\Tests\Functional;
+namespace Arxy\EntityTranslationsBundle\Tests\Functional;
 
+use Arxy\EntityTranslationsBundle\Model\Translation;
+use Arxy\EntityTranslationsBundle\Tests\Entity\Language;
+use Arxy\EntityTranslationsBundle\Tests\Entity\News;
+use Arxy\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
+use Arxy\EntityTranslationsBundle\Tests\Form\Type\NewsType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -10,11 +15,6 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
-use VM5\EntityTranslationsBundle\Model\Translation;
-use VM5\EntityTranslationsBundle\Tests\Entity\Language;
-use VM5\EntityTranslationsBundle\Tests\Entity\News;
-use VM5\EntityTranslationsBundle\Tests\Entity\NewsTranslation;
-use VM5\EntityTranslationsBundle\Tests\Form\Type\NewsType;
 
 class FormTest extends WebTestCase
 {

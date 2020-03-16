@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\Model;
+namespace Arxy\EntityTranslationsBundle\Model;
 
 interface Translatable
 {
@@ -13,5 +14,5 @@ interface Translatable
      * @param Translation $translation
      * @return void
      */
-    public function setCurrentTranslation(Translation $translation = null);
+    public function setCurrentTranslation(Translation $translation = null): void;
 }

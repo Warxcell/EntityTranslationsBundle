@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 
-namespace VM5\EntityTranslationsBundle\EventSubscriber;
+namespace Arxy\EntityTranslationsBundle\EventSubscriber;
 
+use Arxy\EntityTranslationsBundle\Model\Translatable;
+use Arxy\EntityTranslationsBundle\Translator;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use VM5\EntityTranslationsBundle\Model\Translatable;
-use VM5\EntityTranslationsBundle\Translator;
 
 class CurrentTranslationLoader implements EventSubscriber
 {
@@ -14,10 +15,6 @@ class CurrentTranslationLoader implements EventSubscriber
      */
     private $translator;
 
-    /**
-     * CurrentTranslationLoader constructor.
-     * @param Translator $translator
-     */
     public function __construct(Translator $translator)
     {
         $this->translator = $translator;
@@ -34,9 +31,6 @@ class CurrentTranslationLoader implements EventSubscriber
         );
     }
 
-    /**
-     * @param LifecycleEventArgs $eventArgs
-     */
     public function postLoad(LifecycleEventArgs $eventArgs)
     {
         $entity = $eventArgs->getEntity();
