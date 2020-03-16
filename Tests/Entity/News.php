@@ -56,7 +56,7 @@ class News implements Translatable
         return $this->translations;
     }
 
-    public function setCurrentTranslation(Translation $translation = null)
+    public function setCurrentTranslation(Translation $translation = null): void
     {
         $this->currentTranslation = $translation;
     }

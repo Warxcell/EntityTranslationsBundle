@@ -2,10 +2,10 @@
 
 namespace Arxy\EntityTranslationsBundle\Tests\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Arxy\EntityTranslationsBundle\Model\EditableTranslation;
 use Arxy\EntityTranslationsBundle\Model\Language as LanguageInterface;
 use Arxy\EntityTranslationsBundle\Model\Translatable;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
@@ -68,7 +68,7 @@ class NewsTranslation implements EditableTranslation
         $this->translatable = $translatable;
     }
 
-    public function getLanguage()
+    public function getLanguage(): LanguageInterface
     {
         return $this->language;
     }

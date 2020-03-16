@@ -25,7 +25,7 @@ class Language implements \Arxy\EntityTranslationsBundle\Model\Language
         $this->locale = $locale;
     }
 
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }
