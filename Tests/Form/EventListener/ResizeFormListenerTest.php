@@ -27,7 +27,7 @@ class ResizeFormListenerTest extends TestCase
 
     private $languages = [];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->dispatcher = $this->getMockBuilder(
             'Symfony\Component\EventDispatcher\EventDispatcherInterface'
