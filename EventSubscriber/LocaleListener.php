@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace VMArxy5\EntityTranslationsBundle\EventSubscriber;
+namespace Arxy\EntityTranslationsBundle\EventSubscriber;
 
 use Arxy\EntityTranslationsBundle\Guesser\GuesserLoader;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
