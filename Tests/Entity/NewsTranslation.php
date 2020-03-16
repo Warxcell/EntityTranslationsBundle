@@ -110,7 +110,7 @@ class NewsTranslation implements EditableTranslation
      * @param LanguageInterface $language
      * @return void
      */
-    public function setLanguage(LanguageInterface $language)
+    public function setLanguage(LanguageInterface $language): void
     {
         $this->language = $language;
     }
