@@ -9,7 +9,7 @@ framework:
     translator:
         fallbacks: ['en', 'fi']
     router:
-        resource: "routing.yml"
+        resource: "%kernel.project_dir%/Tests/routing.yml"
         strict_requirements: ~
 
 doctrine:
