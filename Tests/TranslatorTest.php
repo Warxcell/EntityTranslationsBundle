@@ -248,6 +248,24 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Това е заглавие на български', $titleBg);
     }
 
+    public function testTranslateWithoutPropertyAccessor()
+    {
+        $this->expectException(\LogicException::class);
+
+        $englishLanguage = new Language('en');
+
+        $newsTranslationEnglish = new NewsTranslation($englishLanguage, 'This is title in english');
+
+        $news = new News(
+            [
+                $newsTranslationEnglish,
+            ]
+        );
+
+        $translator = new Translator('en');
+        $translator->translate($news, 'title');
+    }
+
     public function testTranslateNotCurrentLocale()
     {
         $englishLanguage = new Language('en');
