@@ -42,7 +42,7 @@ class ResizeFormListenerTest extends TestCase
         $this->languages[] = new Language('bg');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->dispatcher = null;
         $this->factory = null;
