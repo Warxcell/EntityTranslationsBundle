@@ -5,7 +5,7 @@ namespace Arxy\EntityTranslationsBundle\EventSubscriber;
 
 use Arxy\EntityTranslationsBundle\Guesser\GuesserLoader;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class LocaleListener implements EventSubscriberInterface
@@ -27,7 +27,7 @@ class LocaleListener implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
         $this->guessLoader->load();
     }
