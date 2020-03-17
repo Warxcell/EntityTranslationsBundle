@@ -24,7 +24,7 @@ doctrine:
         mappings:
             ArxyEntityTranslationsTests:
                 type: annotation
-                dir: 'Entity'
+                dir: '%kernel.project_dir%/Tests/Entity'
                 is_bundle: false
                 prefix: Arxy\EntityTranslationsBundle\Tests\Entity
         resolve_target_entities:
