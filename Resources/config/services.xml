@@ -7,8 +7,7 @@
 
     <services>
         <service id="arxy.entity_translations.translator"
-                 alias="Arxy\EntityTranslationsBundle\Translator"
-                 public="true">
+                 alias="Arxy\EntityTranslationsBundle\Translator">
         </service>
 
         <service id="Arxy\EntityTranslationsBundle\Translator">
