@@ -250,8 +250,6 @@ class TranslatorTest extends TestCase
 
     public function testTranslateWithoutPropertyAccessor()
     {
-        $this->expectException(\LogicException::class);
-
         $englishLanguage = new Language('en');
 
         $newsTranslationEnglish = new NewsTranslation($englishLanguage, 'This is title in english');
@@ -263,6 +261,8 @@ class TranslatorTest extends TestCase
         );
 
         $translator = new Translator('en');
+
+        $this->expectException(\LogicException::class);
         $translator->translate($news, 'title');
     }
 

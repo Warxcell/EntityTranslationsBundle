@@ -1,8 +1,8 @@
 # EntityTranslationsBundle
 
-[![Build Status](https://travis-ci.org/Warxcell/EntityTranslationsBundle.png)](https://travis-ci.org/arxy/EntityTranslationsBundle)
+[![Build Status](https://travis-ci.org/Warxcell/EntityTranslationsBundle.png)](https://travis-ci.org/Warxcell/EntityTranslationsBundle)
 
-[![codecov](https://codecov.io/gh/Warxcell/EntityTranslationsBundle/branch/master/graph/badge.svg)](https://codecov.io/gh/arxy/EntityTranslationsBundle)
+[![codecov](https://codecov.io/gh/Warxcell/EntityTranslationsBundle/branch/master/graph/badge.svg)](https://codecov.io/gh/Warxcell/EntityTranslationsBundle)
 
 Very simple bundle that allows you to translate your entities.
 
