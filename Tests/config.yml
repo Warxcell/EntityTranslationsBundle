@@ -9,7 +9,7 @@ framework:
     translator:
         fallbacks: ['en', 'fi']
     router:
-        resource: "%kernel.project_dir%/routing.yml"
+        resource: "routing.yml"
         strict_requirements: ~
 
 doctrine:
@@ -24,7 +24,7 @@ doctrine:
         mappings:
             ArxyEntityTranslationsTests:
                 type: annotation
-                dir: '%kernel.project_dir%/Entity'
+                dir: 'Entity'
                 is_bundle: false
                 prefix: Arxy\EntityTranslationsBundle\Tests\Entity
         resolve_target_entities:
