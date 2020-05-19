@@ -6,8 +6,10 @@ namespace Arxy\EntityTranslationsBundle\Twig\Extension;
 use Arxy\EntityTranslationsBundle\Model\Translatable;
 use Arxy\EntityTranslationsBundle\Model\Translation;
 use Arxy\EntityTranslationsBundle\Translator;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class TranslationExtension extends \Twig_Extension
+class TranslationExtension extends AbstractExtension
 {
     /**
      * @var Translator
@@ -22,8 +24,8 @@ class TranslationExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('translation', [$this, 'getTranslation']),
-            new \Twig_SimpleFilter('translate', [$this, 'translate']),
+            new TwigFilter('translation', [$this, 'getTranslation']),
+            new TwigFilter('translate', [$this, 'translate']),
         ];
     }
 
