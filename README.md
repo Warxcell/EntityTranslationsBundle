@@ -379,10 +379,10 @@ Load form theme (optionally)
 ```yaml
 twig:
     form_themes:
-        - 'ArxyEntityTranslationsBundle::bootstrap_3_tab_layout.html.twig'
+        - '@ArxyEntityTranslations/bootstrap_4_tab_layout.html.twig'
 ```
 
-Use `'ArxyEntityTranslationsBundle::bootstrap_4_tab_layout.html.twig'` for Bootstrap 4 support.
+Use `'@ArxyEntityTranslations/bootstrap_3_tab_layout.html.twig'` for Bootstrap 3 support.
 
 
 You need to create translation's form.
