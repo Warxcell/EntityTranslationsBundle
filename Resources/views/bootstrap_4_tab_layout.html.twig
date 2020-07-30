@@ -7,9 +7,11 @@
 {% endblock %}
 
 {% block translations_widget %}
-    {{ block('nav_tabs') }}
+    <div>
+        {{ block('nav_tabs') }}
 
-    {{ block('tab_contents') }}
+        {{ block('tab_contents') }}
+    </div>
 {% endblock %}
 
 {% block nav_tabs %}
