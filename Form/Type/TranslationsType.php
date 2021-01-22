@@ -5,16 +5,15 @@ namespace Arxy\EntityTranslationsBundle\Form\Type;
 
 use Arxy\EntityTranslationsBundle\Form\EventListener\ResizeFormListener;
 use Arxy\EntityTranslationsBundle\Model\Language;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TranslationsType extends AbstractType
 {
-
     /**
      * @var ManagerRegistry
      */

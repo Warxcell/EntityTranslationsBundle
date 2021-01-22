@@ -7,16 +7,16 @@ framework:
     form: ~
     default_locale: 'bg'
     translator:
-        fallbacks: ['en', 'fi']
+        fallbacks: [ 'en', 'fi' ]
     router:
         resource: "%kernel.project_dir%/Tests/routing.yml"
         strict_requirements: ~
 
 doctrine:
     dbal:
-        driver:   pdo_sqlite
-        memory:   true
-        charset:  UTF8
+        driver: pdo_sqlite
+        memory: true
+        charset: UTF8
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore

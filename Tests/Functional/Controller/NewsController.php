@@ -4,22 +4,22 @@ declare(strict_types=1);
 namespace Arxy\EntityTranslationsBundle\Tests\Functional\Controller;
 
 use Arxy\EntityTranslationsBundle\Tests\Entity\News;
-use Doctrine\Common\Persistence\AbstractManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 
 class NewsController
 {
     /**
-     * @var AbstractManagerRegistry
+     * @var ManagerRegistry
      */
     private $doctrine;
 
     /**
      * NewsController constructor.
-     * @param AbstractManagerRegistry $doctrine
+     * @param ManagerRegistry $doctrine
      */
-    public function __construct(AbstractManagerRegistry $doctrine)
+    public function __construct(ManagerRegistry $doctrine)
     {
         $this->doctrine = $doctrine;
     }
