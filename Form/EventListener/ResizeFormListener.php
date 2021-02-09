@@ -53,7 +53,7 @@ class ResizeFormListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::POST_SET_DATA => 'postSetData',
             FormEvents::PRE_SUBMIT => 'preSubmit',
             FormEvents::SUBMIT => 'submit',
         );
@@ -91,7 +91,7 @@ class ResizeFormListener implements EventSubscriberInterface
         return $options;
     }
 
-    public function preSetData(FormEvent $event)
+    public function postSetData(FormEvent $event)
     {
         $form = $event->getForm();
         foreach ($this->languages as $value) {
