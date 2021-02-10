@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Arxy\EntityTranslationsBundle\Form\EventListener;
 
+use Arxy\EntityTranslationsBundle\Model\EditableTranslation;
 use Arxy\EntityTranslationsBundle\Model\Language;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -58,6 +59,14 @@ class ResizeFormListener implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();
+        /** @var EditableTranslation[] $translations */
+        $translations = $event->getData();
+
+        $indexed = [];
+        foreach ($translations as $translation) {
+            $indexed[$translation->getLanguage()->getLocale()] = $translation;
+        }
+        $event->setData($indexed);
 
         foreach ($this->languages as $index => $language) {
             $locale = $language->getLocale();
