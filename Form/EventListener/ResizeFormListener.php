@@ -69,7 +69,7 @@ class ResizeFormListener implements EventSubscriberInterface
             $options['language'] = $language;
 
             $form->add(
-                $index,
+                $locale,
                 $this->type,
                 $options
             );
