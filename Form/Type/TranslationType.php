@@ -20,10 +20,12 @@ class TranslationType extends AbstractType
         $builder->addEventListener(
             FormEvents::SUBMIT,
             function (FormEvent $event) {
-                $data = $event->getData();
                 $form = $event->getForm();
+                if ($form->isRequired()) {
+                    return;
+                }
 
-                foreach ($form->all() as $index => $child) {
+                foreach ($form->all() as $child) {
                     if (!$child->isEmpty()) {
                         return;
                     }
