@@ -29,12 +29,7 @@ class ResizeFormListener implements EventSubscriberInterface
     /**
      * @var Language[]
      */
-    private $languages = [];
-
-    /**
-     * @var array
-     */
-    private $forDelete = [];
+    private $languages;
 
     public function __construct(
         string $type,
