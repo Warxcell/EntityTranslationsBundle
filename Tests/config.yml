@@ -5,6 +5,8 @@ framework:
     test: ~
     secret: dsaijdsauhduash
     form: ~
+    validation:
+        enable_annotations: true
     default_locale: 'bg'
     translator:
         fallbacks: [ 'en', 'fi' ]

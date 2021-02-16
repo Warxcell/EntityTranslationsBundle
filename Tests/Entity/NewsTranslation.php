@@ -7,6 +7,7 @@ use Arxy\EntityTranslationsBundle\Model\EditableTranslation;
 use Arxy\EntityTranslationsBundle\Model\Language as LanguageInterface;
 use Arxy\EntityTranslationsBundle\Model\Translatable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -31,6 +32,7 @@ class NewsTranslation implements EditableTranslation
     /**
      * @var string
      * @ORM\Column()
+     * @Assert\NotBlank()
      */
     private $title;
 

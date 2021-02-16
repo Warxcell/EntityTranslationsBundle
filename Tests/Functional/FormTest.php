@@ -14,8 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\NotNull;
 
 class FormTest extends WebTestCase
 {
@@ -66,7 +64,7 @@ class FormTest extends WebTestCase
      * @param $locale
      * @return boolean
      */
-    private function containsTranslation($translations, $locale)
+    private function containsTranslation($translations, string $locale): bool
     {
         foreach ($translations as $translation) {
             if ($translation->getLanguage()->getLocale() == $locale) {
@@ -89,117 +87,6 @@ class FormTest extends WebTestCase
         );
     }
 
-    public function testFormWithEmptyRequiredEnglish()
-    {
-        $client = static::createClient();
-        $kernel = $client->getKernel();
-        $container = $kernel->getContainer();
-
-        $this->buildDb($kernel);
-        $this->insertLanguages($kernel);
-
-        $news = new News();
-
-        $options['translation_options'] = [
-            'entry_language_options' => [
-                'en' => [
-                    'required' => true,
-                ],
-            ],
-            'entry_options' => [
-                'constraints' => [
-                    new NotNull(['groups' => 'en']),
-                ],
-            ],
-        ];
-
-        $data = [
-            'translations' => [
-                'en' => [
-                    'title' => '',
-                    'description' => '',
-                ],
-                'fi' => [
-                    'title' => 'Finnish title',
-                    'description' => 'Finnish description',
-                ],
-            ],
-        ];
-
-        $form = $container->get('form.factory')->create(NewsType::class, $news, $options);
-        $form->submit($data);
-
-        $this->assertTrue($form->isSubmitted());
-        $this->assertFalse($form->isValid());
-
-        $errors = $form->getErrors(true);
-
-        $this->assertEquals(1, $errors->count());
-        $error = $errors[0];
-        $this->assertEquals('children[translations].children[en].data', $error->getCause()->getPropertyPath());
-        $this->assertEquals('ad32d13f-c3d4-423b-909a-857b961eb720', $error->getCause()->getCode());
-    }
-
-    public function testFormWithEmptyTitle()
-    {
-        $client = static::createClient();
-        $kernel = $client->getKernel();
-        $container = $kernel->getContainer();
-
-        $this->buildDb($kernel);
-        $this->insertLanguages($kernel);
-
-        $news = new News();
-
-        $options['translation_options'] = [
-            'entry_options' => [
-                'constraints' => [
-                    new NotNull(['groups' => 'en']),
-                ],
-                'title_options' => [
-                    'constraints' => [
-                        new NotBlank(),
-                    ],
-                ],
-            ],
-        ];
-
-        $data = [
-            'translations' => [
-                'en' => [
-                    'title' => null,
-                    'description' => 'English description',
-                ],
-                'bg' => [
-                    'title' => 'Заглавие на български',
-                    'description' => 'Съдържание на български',
-                ],
-                'fi' => [
-                    'title' => 'Finnish title',
-                    'description' => 'Finnish description',
-                ],
-            ],
-        ];
-
-        $form = $container->get('form.factory')->create(NewsType::class, $news, $options);
-        $form->submit($data);
-
-        $this->assertTrue($form->isSubmitted());
-        $this->assertFalse($form->isValid());
-
-        $errors = $form->getErrors(true);
-
-        $this->assertEquals(1, $errors->count());
-
-        $error = $errors[0];
-
-        $this->assertEquals(
-            'children[translations].children[en].children[title].data',
-            $error->getCause()->getPropertyPath()
-        );
-        $this->assertEquals('c1051bb4-d103-4f74-8988-acbcafc7fdc3', $error->getCause()->getCode());
-    }
-
     public function testSuccessInsertAllTranslations()
     {
         $client = static::createClient();
@@ -211,24 +98,6 @@ class FormTest extends WebTestCase
 
         $news = new News();
 
-        $options['translation_options'] = [
-            'entry_language_options' => [
-                'en' => [
-                    'required' => true,
-                ],
-            ],
-            'entry_options' => [
-                'constraints' => [
-                    new NotNull(['groups' => 'en']),
-                ],
-                'title_options' => [
-                    'constraints' => [
-                        new NotBlank(),
-                    ],
-                ],
-            ],
-        ];
-
         $data = [
             'translations' => [
                 'en' => [
@@ -246,7 +115,7 @@ class FormTest extends WebTestCase
             ],
         ];
 
-        $form = $container->get('form.factory')->create(NewsType::class, $news, $options);
+        $form = $container->get('form.factory')->create(NewsType::class, $news);
         $form->submit($data);
 
         $this->assertTrue($form->isSubmitted());
@@ -257,63 +126,7 @@ class FormTest extends WebTestCase
         $this->assertHasTranslation($news->getTranslations(), 'fi');
     }
 
-    public function testSuccessInsertOneTranslations()
-    {
-        $client = static::createClient();
-        $kernel = $client->getKernel();
-        $container = $kernel->getContainer();
-
-        $this->buildDb($kernel);
-        $this->insertLanguages($kernel);
-        $em = $kernel->getContainer()->get('doctrine')->getManager();
-
-        $news = new News();
-
-        $options['translation_options'] = [
-            'entry_language_options' => [
-                'en' => [
-                    'required' => true,
-                ],
-            ],
-            'entry_options' => [
-                'constraints' => [
-                    new NotNull(['groups' => 'en']),
-                ],
-                'title_options' => [
-                    'constraints' => [
-                        new NotBlank(),
-                    ],
-                ],
-            ],
-        ];
-
-        $data = [
-            'translations' => [
-                'en' => [
-                    'title' => 'English Title',
-                    'description' => 'English description',
-                ],
-                'bg' => [
-                    'title' => null,
-                    'description' => null,
-                ],
-                'fi' => [
-                    'title' => null,
-                    'description' => null,
-                ],
-            ],
-        ];
-
-        $form = $container->get('form.factory')->create(NewsType::class, $news, $options);
-        $form->submit($data);
-
-        $this->assertTrue($form->isSubmitted());
-        $this->assertTrue($form->isValid());
-        $this->assertCount(1, $news->getTranslations());
-        $this->assertHasTranslation($news->getTranslations(), 'en');
-    }
-
-    public function testDeleteTranslationsWithoutRequired()
+    public function testDeleteEmptyTranslations()
     {
         $client = static::createClient();
         $kernel = $client->getKernel();
@@ -322,7 +135,6 @@ class FormTest extends WebTestCase
         $this->buildDb($kernel);
         $languages = $this->insertLanguages($kernel);
         $em = $kernel->getContainer()->get('doctrine')->getManager();
-        $languageRepository = $em->getRepository(Language::class);
 
         $newsTranslationBg = new NewsTranslation(
             $languages['bg'],
@@ -350,241 +162,29 @@ class FormTest extends WebTestCase
         $em->persist($news);
         $em->flush();
 
-        $options['translation_options'] = [
-            'entry_options' => [
-                'constraints' => [
-                    new NotNull(['groups' => 'en']),
-                ],
-                'title_options' => [
-                    'constraints' => [
-                        new NotBlank(),
+        $form = $container->get('form.factory')->create(NewsType::class, $news);
+        $form->submit(
+            [
+                'translations' => [
+                    'en' => [
+                        'title' => null,
+                        'description' => null,
+                    ],
+                    'bg' => [
+                        'title' => null,
+                        'description' => null,
+                    ],
+                    'fi' => [
+                        'title' => null,
+                        'description' => null,
                     ],
                 ],
-            ],
-        ];
-
-        $data = [
-            'translations' => [
-                'en' => [
-                    'title' => null,
-                    'description' => null,
-                ],
-                'bg' => [
-                    'title' => null,
-                    'description' => null,
-                ],
-                'fi' => [
-                    'title' => null,
-                    'description' => null,
-                ],
-            ],
-        ];
-
-        $form = $container->get('form.factory')->create(NewsType::class, $news, $options);
-        $form->submit($data);
+            ]
+        );
 
         $this->assertTrue($form->isSubmitted());
         $this->assertTrue($form->isValid());
         $this->assertEmpty($news->getTranslations());
-    }
-
-    public function testDeleteTranslationsWithRequired()
-    {
-        $client = static::createClient();
-        $kernel = $client->getKernel();
-        $container = $kernel->getContainer();
-
-        $this->buildDb($kernel);
-        $this->insertLanguages($kernel);
-        $em = $kernel->getContainer()->get('doctrine')->getManager();
-        $languageRepository = $em->getRepository(Language::class);
-
-        $newsTranslationBg = new NewsTranslation(
-            $languageRepository->findOneBy(['locale' => 'bg']),
-            'Заглавие на български',
-            'Съдържание на български'
-        );
-        $newsTranslationEn = new NewsTranslation(
-            $languageRepository->findOneBy(['locale' => 'en']),
-            'English title',
-            'English description'
-        );
-        $newsTranslationFi = new NewsTranslation(
-            $languageRepository->findOneBy(['locale' => 'fi']),
-            'English title',
-            'English description'
-        );
-        $news = new News(
-            [
-                $newsTranslationBg,
-                $newsTranslationEn,
-                $newsTranslationFi,
-            ]
-        );
-
-        $em->persist($news);
-        $em->flush();
-
-        $options['translation_options'] = [
-            'entry_language_options' => [
-                'en' => [
-                    'required' => true,
-                ],
-            ],
-            'entry_options' => [
-                'constraints' => [
-                    new NotNull(['groups' => 'en']),
-                ],
-                'title_options' => [
-                    'constraints' => [
-                        new NotBlank(),
-                    ],
-                ],
-            ],
-        ];
-
-        $data = [
-            'translations' => [
-                'en' => [
-                    'title' => null,
-                    'description' => null,
-                ],
-                'bg' => [
-                    'title' => null,
-                    'description' => null,
-                ],
-                'fi' => [
-                    'title' => null,
-                    'description' => null,
-                ],
-            ],
-        ];
-
-        $form = $container->get('form.factory')->create(NewsType::class, $news, $options);
-        $form->submit($data);
-
-        $this->assertTrue($form->isSubmitted());
-        $this->assertFalse($form->isValid());
-        $errors = $form->getErrors(true);
-        $this->assertEquals(1, $errors->count());
-
-        foreach ($errors as $error) {
-            $this->assertEquals(
-                'children[translations].children[en].children[title].data',
-                $error->getCause()->getPropertyPath()
-            );
-            $this->assertEquals('c1051bb4-d103-4f74-8988-acbcafc7fdc3', $error->getCause()->getCode());
-        }
-
-    }
-
-    public function testFieldWithValidationGroupAndEmptyValue()
-    {
-        $client = static::createClient();
-        $kernel = $client->getKernel();
-        $container = $kernel->getContainer();
-
-        $this->buildDb($kernel);
-        $this->insertLanguages($kernel);
-        $em = $kernel->getContainer()->get('doctrine')->getManager();
-
-        $news = new News();
-
-        $options['translation_options'] = [
-            'entry_options' => [
-                'constraints' => [
-                    new NotNull(['groups' => 'en']),
-                ],
-                'description_options' => [
-                    'constraints' => [
-                        new NotBlank(['groups' => 'en']),
-                    ],
-                ],
-            ],
-        ];
-
-        $data = [
-            'translations' => [
-                'en' => [
-                    'title' => null,
-                    'description' => null,
-                ],
-                'bg' => [
-                    'title' => 'Заглавие на български',
-                    'description' => null,
-                ],
-                'fi' => [
-                    'title' => 'Finnish Title',
-                    'description' => null,
-                ],
-            ],
-        ];
-
-        $form = $container->get('form.factory')->create(NewsType::class, $news, $options);
-        $form->submit($data);
-
-        $this->assertTrue($form->isSubmitted());
-        $this->assertTrue($form->isValid());
-    }
-
-    public function testFieldWithValidationGroupAndEmptyOnlyOneField()
-    {
-        $client = static::createClient();
-        $kernel = $client->getKernel();
-        $container = $kernel->getContainer();
-
-        $this->buildDb($kernel);
-        $this->insertLanguages($kernel);
-        $em = $kernel->getContainer()->get('doctrine')->getManager();
-
-        $news = new News();
-
-        $options['translation_options'] = [
-            'entry_options' => [
-                'constraints' => [
-                    new NotNull(['groups' => 'en']),
-                ],
-                'description_options' => [
-                    'constraints' => [
-                        new NotBlank(['groups' => 'en']),
-                    ],
-                ],
-            ],
-        ];
-
-        $data = [
-            'translations' => [
-                'en' => [
-                    'title' => 'English Title',
-                    'description' => null,
-                ],
-                'bg' => [
-                    'title' => 'Заглавие на български',
-                    'description' => null,
-                ],
-                'fi' => [
-                    'title' => 'Finnish Title',
-                    'description' => null,
-                ],
-            ],
-        ];
-
-        $form = $container->get('form.factory')->create(NewsType::class, $news, $options);
-        $form->submit($data);
-
-        $this->assertTrue($form->isSubmitted());
-        $this->assertFalse($form->isValid());
-
-        $errors = $form->getErrors(true);
-        foreach ($errors as $error) {
-            $this->assertEquals(
-                'children[translations].children[en].children[description].data',
-                $error->getCause()->getPropertyPath()
-            );
-            $this->assertEquals('c1051bb4-d103-4f74-8988-acbcafc7fdc3', $error->getCause()->getCode());
-        }
-
-        $this->assertEquals(1, $errors->count());
     }
 
     public function testWithEmptyData()
@@ -596,25 +196,58 @@ class FormTest extends WebTestCase
         $this->buildDb($kernel);
         $this->insertLanguages($kernel);
 
-        $data = [
-            'translations' => [
-                'en' => [
-                    'title' => 'English Title',
-                    'description' => 'Description EN',
-                ],
-            ],
-        ];
+        $news = new News();
 
-        $form = $container->get('form.factory')->create(NewsType::class);
-        $form->submit($data);
+        $form = $container->get('form.factory')->create(NewsType::class, $news);
+        $form->submit(
+            [
+                'translations' => [
+                    'en' => [
+                        'title' => 'English Title',
+                        'description' => 'Description EN',
+                    ],
+                ],
+            ]
+        );
 
         $this->assertTrue($form->isSubmitted());
         $this->assertTrue($form->isValid());
 
-        $data = $form->getData();
-        $translations = $data['translations'];
+        $this->assertCount(1, $news->getTranslations());
+        $this->assertHasTranslation($news->getTranslations(), 'en');
+    }
 
-        $this->assertCount(1, $translations);
-        $this->assertHasTranslation($translations, 'en');
+    public function testDataConstraintsMapping()
+    {
+        $client = static::createClient();
+        $kernel = $client->getKernel();
+        $container = $kernel->getContainer();
+
+        $this->buildDb($kernel);
+        $this->insertLanguages($kernel);
+
+        $news = new News();
+
+        $form = $container->get('form.factory')->create(NewsType::class, $news);
+        $form->submit(
+            [
+                'translations' => [
+                    'en' => [
+                        'title' => null,
+                        'description' => 'Description EN',
+                    ],
+                    'bg' => [
+                        'title' => null,
+                        'description' => 'Description BG',
+                    ],
+                ],
+            ]
+        );
+
+        $this->assertTrue($form->isSubmitted());
+        $this->assertFalse($form->isValid());
+        $this->assertCount(2, $form->getErrors(true, true));
+        $this->assertCount(1, $form->get('translations')->get('en')->get('title')->getErrors());
+        $this->assertCount(1, $form->get('translations')->get('bg')->get('title')->getErrors());
     }
 }

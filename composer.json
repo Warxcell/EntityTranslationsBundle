@@ -1,39 +1,40 @@
 {
-    "name": "arxy/entity-translations-bundle",
-    "license": "MIT",
-    "description": "This bundle provides translations for entities in your project. It's a bundle, but can be used standalone.",
-    "type": "symfony-bundle",
-    "authors": [
-        {
-            "name": "Bozhidar Hristov",
-            "email": "warxcell@gmail.com"
-        }
-    ],
-    "keywords": [
-        "translation"
-    ],
-    "require": {
-        "php": "^7.2"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.0 | ^9.0",
-        "symfony/symfony": "~4.4 | ~5.0",
-        "doctrine/persistence": "~2.0",
-        "doctrine/orm": "~2.5",
-        "doctrine/doctrine-bundle": "~1.8 | ~2.0"
-    },
-    "suggest": {
-        "doctrine/orm": "Autoload translations with Doctrine ORM",
-        "symfony/symfony": "Needed for easy integration into Symfony",
-        "twig/twig": "Needed to use Twig Extension to translate in twig.",
-        "symfony/property-access": "Needed for Twig extension to translate",
-        "symfony/translation": "Needed if you want to use Symfony Translation's configuration. Otherwise this bundle should be setup separately.",
-        "symfony/form": "Needed if you want to use forms to translate entities.",
-        "doctrine/doctrine-bundle": "Needed if you want to use forms to translate entities."
-    },
-    "autoload": {
-        "psr-4": {
-            "Arxy\\EntityTranslationsBundle\\": ""
-        }
+  "name": "arxy/entity-translations-bundle",
+  "license": "MIT",
+  "description": "This bundle provides translations for entities in your project. It's a bundle, but can be used standalone.",
+  "type": "symfony-bundle",
+  "authors": [
+    {
+      "name": "Bozhidar Hristov",
+      "email": "warxcell@gmail.com"
     }
+  ],
+  "keywords": [
+    "translation"
+  ],
+  "require": {
+    "php": "^7.2 | ^8.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.0 | ^9.0",
+    "symfony/symfony": "~4.4 | ~5.0",
+    "doctrine/persistence": "~2.0",
+    "doctrine/orm": "~2.5",
+    "doctrine/doctrine-bundle": "~1.8 | ~2.0",
+    "ext-intl": "*"
+  },
+  "suggest": {
+    "doctrine/orm": "Autoload translations with Doctrine ORM",
+    "symfony/symfony": "Needed for easy integration into Symfony",
+    "twig/twig": "Needed to use Twig Extension to translate in twig.",
+    "symfony/property-access": "Needed for Twig extension to translate",
+    "symfony/translation": "Needed if you want to use Symfony Translation's configuration. Otherwise this bundle should be setup separately.",
+    "symfony/form": "Needed if you want to use forms to translate entities.",
+    "doctrine/doctrine-bundle": "Needed if you want to use forms to translate entities."
+  },
+  "autoload": {
+    "psr-4": {
+      "Arxy\\EntityTranslationsBundle\\": ""
+    }
+  }
 }

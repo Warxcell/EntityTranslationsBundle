@@ -7,6 +7,7 @@ use Arxy\EntityTranslationsBundle\Model\Translatable;
 use Arxy\EntityTranslationsBundle\Model\Translation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -24,6 +25,7 @@ class News implements Translatable
     /**
      * @var NewsTranslation[]|ArrayCollection
      * @ORM\OneToMany(targetEntity="NewsTranslation", mappedBy="translatable", cascade={"persist"}, orphanRemoval=true)
+     * @Assert\Valid(traverse=true)
      */
     private $translations;
 
