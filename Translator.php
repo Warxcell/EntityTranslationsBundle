@@ -133,6 +133,11 @@ class Translator
         unset($this->managed[$this->getId($translatable)]);
     }
 
+    public function clear(): void
+    {
+        $this->managed = [];
+    }
+
     public function getLocale(): string
     {
         return $this->locale;

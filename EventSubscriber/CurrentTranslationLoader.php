@@ -7,6 +7,7 @@ use Arxy\EntityTranslationsBundle\Model\Translatable;
 use Arxy\EntityTranslationsBundle\Translator;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\OnClearEventArgs;
 
 class CurrentTranslationLoader implements EventSubscriber
 {
@@ -28,6 +29,7 @@ class CurrentTranslationLoader implements EventSubscriber
         return array(
             'postLoad',
             'postPersist',
+            'onClear',
         );
     }
 
@@ -45,5 +47,10 @@ class CurrentTranslationLoader implements EventSubscriber
         if ($entity instanceof Translatable) {
             $this->translator->initializeCurrentTranslation($entity);
         }
+    }
+
+    public function onClear(OnClearEventArgs $args)
+    {
+        $this->translator->clear();
     }
 }
