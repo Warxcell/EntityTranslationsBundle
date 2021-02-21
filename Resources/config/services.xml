@@ -21,7 +21,9 @@
                  class="Arxy\EntityTranslationsBundle\EventSubscriber\CurrentTranslationLoader"
                  public="false">
             <argument type="service" id="arxy.entity_translations.translator"/>
-            <tag name="doctrine.event_subscriber"/>
+            <tag name="doctrine.event_listener" event="postLoad" lazy="true"/>
+            <tag name="doctrine.event_listener" event="postPersist" lazy="true"/>
+            <tag name="doctrine.event_listener" event="onClear" lazy="true"/>
         </service>
 
         <service id="Arxy\EntityTranslationsBundle\Guesser\GuesserLoader">
