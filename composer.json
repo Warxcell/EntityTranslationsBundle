@@ -21,7 +21,8 @@
         "doctrine/persistence": "~2.0",
         "doctrine/orm": "~2.5",
         "doctrine/doctrine-bundle": "~1.8 | ~2.0",
-        "ext-intl": "*"
+        "ext-intl": "*",
+        "friendsofphp/php-cs-fixer": "^2.18"
     },
     "suggest": {
         "doctrine/orm": "Autoload translations with Doctrine ORM",

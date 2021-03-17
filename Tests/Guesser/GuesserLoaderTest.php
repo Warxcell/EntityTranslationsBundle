@@ -14,7 +14,8 @@ class GuesserLoaderTest extends TestCase
         $translator = new Translator('en');
 
         $guesserLoader = new GuesserLoader(
-            $translator, [
+            $translator,
+            [
                 new StaticGuesser('fi', []),
             ]
         );
@@ -31,7 +32,8 @@ class GuesserLoaderTest extends TestCase
         $fallbacks = ['fi', 'en', 'bg'];
 
         $guesserLoader = new GuesserLoader(
-            $translator, [
+            $translator,
+            [
                 new StaticGuesser('fi', $fallbacks),
             ]
         );
@@ -46,7 +48,8 @@ class GuesserLoaderTest extends TestCase
         $translator = new Translator('en');
 
         $guesserLoader = new GuesserLoader(
-            $translator, [
+            $translator,
+            [
                 new StaticGuesser(null, null),
             ]
         );
@@ -61,7 +64,8 @@ class GuesserLoaderTest extends TestCase
         $translator = new Translator('en');
 
         $guesserLoader = new GuesserLoader(
-            $translator, [
+            $translator,
+            [
                 new StaticGuesser('fi'),
             ]
         );
@@ -76,7 +80,8 @@ class GuesserLoaderTest extends TestCase
         $translator = new Translator('en');
 
         $guesserLoader = new GuesserLoader(
-            $translator, [
+            $translator,
+            [
                 new StaticGuesser('bg', null),
                 new StaticGuesser('fi', null),
             ]
@@ -92,7 +97,8 @@ class GuesserLoaderTest extends TestCase
         $translator = new Translator('en');
 
         $guesserLoader = new GuesserLoader(
-            $translator, [
+            $translator,
+            [
                 new StaticGuesser('fi', ['fi', 'en']),
                 new StaticGuesser('bg', ['bg', 'en']),
             ]

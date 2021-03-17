@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Arxy\EntityTranslationsBundle\Twig\Extension;
@@ -11,9 +12,7 @@ use Twig\TwigFilter;
 
 class TranslationExtension extends AbstractExtension
 {
-    /**
-     * @var Translator
-     */
+    /** @var Translator */
     private $translator;
 
     public function __construct(Translator $translationService)
