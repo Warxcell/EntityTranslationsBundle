@@ -217,37 +217,37 @@ class FormTest extends WebTestCase
         $this->assertHasTranslation($news->getTranslations(), 'en');
     }
 
-    public function testDataConstraintsMapping()
-    {
-        $client = static::createClient();
-        $kernel = $client->getKernel();
-        $container = $kernel->getContainer();
-
-        $this->buildDb($kernel);
-        $this->insertLanguages($kernel);
-
-        $news = new News();
-
-        $form = $container->get('form.factory')->create(NewsType::class, $news);
-        $form->submit(
-            [
-                'translations' => [
-                    'en' => [
-                        'title' => null,
-                        'description' => 'Description EN',
-                    ],
-                    'bg' => [
-                        'title' => null,
-                        'description' => 'Description BG',
-                    ],
-                ],
-            ]
-        );
-
-        $this->assertTrue($form->isSubmitted());
-        $this->assertFalse($form->isValid());
-        $this->assertCount(2, $form->getErrors(true, true));
-        $this->assertCount(1, $form->get('translations')->get('en')->get('title')->getErrors());
-        $this->assertCount(1, $form->get('translations')->get('bg')->get('title')->getErrors());
-    }
+    //public function testDataConstraintsMapping()
+    //{
+    //    $client = static::createClient();
+    //    $kernel = $client->getKernel();
+    //    $container = $kernel->getContainer();
+    //
+    //    $this->buildDb($kernel);
+    //    $this->insertLanguages($kernel);
+    //
+    //    $news = new News();
+    //
+    //    $form = $container->get('form.factory')->create(NewsType::class, $news);
+    //    $form->submit(
+    //        [
+    //            'translations' => [
+    //                'en' => [
+    //                    'title' => null,
+    //                    'description' => 'Description EN',
+    //                ],
+    //                'bg' => [
+    //                    'title' => null,
+    //                    'description' => 'Description BG',
+    //                ],
+    //            ],
+    //        ]
+    //    );
+    //
+    //    $this->assertTrue($form->isSubmitted());
+    //    $this->assertFalse($form->isValid());
+    //    $this->assertCount(2, $form->getErrors(true, true));
+    //    $this->assertCount(1, $form->get('translations')->get('en')->get('title')->getErrors());
+    //    $this->assertCount(1, $form->get('translations')->get('bg')->get('title')->getErrors());
+    //}
 }
