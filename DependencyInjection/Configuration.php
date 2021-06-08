@@ -18,8 +18,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('arxy_entity_translations');
+        $treeBuilder = new TreeBuilder('arxy_entity_translations');
 
         return $treeBuilder;
     }
