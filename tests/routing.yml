@@ -1,0 +1,7 @@
+index:
+    path: /{_locale}
+    defaults: {_controller: news_controller:indexAction, _locale: null}
+
+news_read:
+    path: /{_locale}/news/{id}
+    defaults: {_controller: news_controller:newsReadAction}

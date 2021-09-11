@@ -35,7 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Arxy\\EntityTranslationsBundle\\": ""
+            "Arxy\\EntityTranslationsBundle\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Arxy\\EntityTranslationsBundle\\Tests\\": "tests"
         }
     }
 }
