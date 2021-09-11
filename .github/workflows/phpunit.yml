@@ -9,7 +9,7 @@ jobs:
             matrix:
                 php: [7.4, 8.0]
         env:
-            extensions: bcmath gd xdebug
+            extensions: bcmath gd xdebug intl
             XDEBUG_MODE: coverage
         steps:
             -   uses: actions/checkout@v2
